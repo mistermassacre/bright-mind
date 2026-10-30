@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bright Mind</title>
+<meta name="description" content="Bright Mind: cheerful brain games, wellness tips, and lots of love.">
+<meta name="theme-color" content="#F76707">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Bright Mind">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<style>
+*{box-sizing:border-box}
+:root{--ink:#2D2340;--muted:#594C6B;--pri:#E8590C;--acc:#6741D9;--good:#2B8A3E;--card:#fff;--line:#F1D9C2;--soft:#FFF4E6}
+html{font-size:20px;-webkit-text-size-adjust:100%}
+html.big{font-size:24px}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,#FFF3E0 0%,#FFE8F0 100%) fixed;min-height:100vh;line-height:1.45;-webkit-tap-highlight-color:transparent}
+button,input{font-family:inherit}
+button{cursor:pointer;touch-action:manipulation}
+header.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:calc(env(safe-area-inset-top) + .4rem) calc(env(safe-area-inset-right) + .8rem) .4rem calc(env(safe-area-inset-left) + .8rem);background:linear-gradient(90deg,#FF922B,#F76707);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.brand{font-weight:800;font-size:1.25rem;text-shadow:0 1px 2px rgba(0,0,0,.2)}
+.iconbtn{min-width:3rem;min-height:3rem;border:0;border-radius:50%;background:rgba(255,255,255,.28);color:#fff;font-size:1.4rem}
+main{max-width:860px;margin:0 auto;padding:1rem calc(env(safe-area-inset-right) + 1rem) calc(env(safe-area-inset-bottom) + 6.5rem) calc(env(safe-area-inset-left) + 1rem)}
+nav.bottom{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);gap:.2rem;background:#fff;border-top:2px solid var(--line);padding:.3rem calc(env(safe-area-inset-right) + .3rem) calc(env(safe-area-inset-bottom) + .3rem) calc(env(safe-area-inset-left) + .3rem)}
+nav.bottom button{border:0;background:none;font-size:.85rem;font-weight:700;color:var(--muted);min-height:3.3rem;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:14px}
+nav.bottom button span{font-size:1.5rem;line-height:1.1}
+nav.bottom button.on{color:var(--pri);background:var(--soft)}
+.card{background:var(--card);border-radius:22px;padding:1.1rem 1.2rem;margin:0 0 1rem;box-shadow:0 4px 16px rgba(120,60,20,.10)}
+.center{text-align:center}
+h1{font-size:1.8rem;margin:.2rem 0 .5rem;line-height:1.2}
+h2{font-size:1.4rem;margin:.2rem 0 .6rem;line-height:1.25}
+h3{font-size:1.15rem;margin:.2rem 0 .5rem}
+p{margin:.4rem 0}
+.muted{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:3.1rem;padding:.6rem 1.2rem;border:0;border-radius:18px;font-size:1.05rem;font-weight:700;background:var(--pri);color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.18);text-decoration:none}
+.btn:active{transform:translateY(2px);box-shadow:none}
+.btn.alt{background:var(--acc)} .btn.green{background:var(--good)} .btn.blue{background:#1971C2}
+.btn.ghost{background:#fff;color:var(--ink);border:2px solid var(--line);box-shadow:none}
+.btn.wide{width:100%}
+.row{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1rem}
+.row.center{justify-content:center}
+.affirm{background:linear-gradient(135deg,#FFE3EC,#FFF0F6);border:2px solid #FFC2D4;border-radius:20px;padding:1rem 1.1rem;font-size:1.15rem;font-weight:600;color:#7A1E48;margin:0 0 1rem}
+.tip{background:#EBFBEE;border:2px solid #B2F2BB;border-radius:20px;padding:1rem 1.1rem;color:#1B4D2A;margin:0 0 1rem}
+.note{background:#E7F5FF;border:2px solid #A5D8FF;border-radius:20px;padding:1rem 1.1rem;color:#0B3B66;margin:.6rem 0}
+.gamegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.8rem}
+.gcard{display:flex;align-items:center;gap:.8rem;text-align:left;width:100%;min-height:5rem;padding:.8rem 1rem;border-radius:20px;border:3px solid transparent;background:#fff;font-size:1rem;color:var(--ink);box-shadow:0 3px 10px rgba(0,0,0,.08)}
+.gcard .ge{font-size:2.1rem;width:3.4rem;height:3.4rem;border-radius:16px;display:flex;align-items:center;justify-content:center;flex:none}
+.gcard b{display:block;font-size:1.1rem}
+.gcard small{display:block;color:var(--muted);font-size:.88rem}
+.gcard.done{border-color:#69DB7C;background:#F4FCF5}
+.pill{display:inline-block;padding:.15rem .7rem;border-radius:999px;background:#F3F0FF;color:#5F3DC4;font-weight:700;font-size:.9rem}
+.pill.gold{background:#FFF3BF;color:#8F5B00}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.7rem}
+.stat{background:#FFF9F0;border:2px solid var(--line);border-radius:18px;padding:.8rem;text-align:center}
+.stat b{display:block;font-size:1.8rem;color:var(--pri)}
+.status{text-align:center;color:var(--muted);font-weight:700;min-height:1.5rem}
+.fb{min-height:2.4rem;text-align:center;font-weight:700;font-size:1.15rem;margin:.4rem 0}
+.fb.good{color:var(--good)} .fb.soft{color:#A35200}
+.ghead{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.ghelp{color:var(--muted)}
+/* memory */
+.mgrid{display:grid;gap:.6rem;max-width:560px;margin:0 auto}
+.mcard{aspect-ratio:1/1;min-height:4rem;border:3px solid transparent;border-radius:18px;font-size:2.3rem;background:linear-gradient(135deg,#9775FA,#6741D9);color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.15);padding:0}
+.mcard .front{display:none}
+.mcard .back{font-size:1.6rem;opacity:.8}
+.mcard.up{background:#fff;border-color:#D0BFFF}
+.mcard.up .front{display:inline}.mcard.up .back{display:none}
+.mcard.done{background:#EBFBEE;border-color:#69DB7C;animation:pop .45s}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
+/* speed */
+.target{text-align:center;font-size:1.3rem;font-weight:700;margin:.4rem 0 .8rem}
+.tbig{font-size:3rem;display:inline-block;vertical-align:middle;background:#FFF9DB;border:3px solid #FFE066;border-radius:20px;padding:.1rem .6rem}
+.sgrid{display:grid;gap:.6rem;max-width:520px;margin:0 auto}
+.scell{aspect-ratio:1/1;min-height:3.6rem;font-size:2.4rem;background:#fff;border:3px solid var(--line);border-radius:18px;padding:0}
+.scell.nope{background:#FFF4E6}
+.scell.yes{background:#D3F9D8;border-color:#40C057;animation:pop .4s}
+.waiting{text-align:center;font-size:1.6rem;font-weight:800;color:var(--acc);padding:2rem 0}
+/* simon */
+.simon{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;max-width:400px;margin:0 auto}
+.pad{aspect-ratio:1/1;min-height:6rem;border:0;border-radius:30px;opacity:.5;transition:opacity .12s,transform .12s;box-shadow:0 5px 0 rgba(0,0,0,.2)}
+.pad.lit{opacity:1;transform:scale(1.06);box-shadow:0 0 28px 8px rgba(255,255,255,.95),0 5px 0 rgba(0,0,0,.2)}
+/* words */
+.clue{text-align:center;font-size:1.2rem;font-weight:700;color:var(--acc)}
+.slots,.tiles{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap;margin:1rem 0}
+.slot{width:clamp(2.3rem,11vw,3.2rem);height:3.4rem;border-radius:12px;border:3px dashed #B197FC;font-size:1.6rem;font-weight:800;background:#fff;color:var(--ink);padding:0}
+.slot.filled{border-style:solid;background:#F3F0FF}
+.slot.fixed{background:#EBFBEE;border:3px solid #69DB7C}
+.tile{width:clamp(2.6rem,12vw,3.4rem);height:3.4rem;border-radius:14px;border:0;background:#FFD43B;font-size:1.6rem;font-weight:800;color:#5C3D00;box-shadow:0 3px 0 #E8A800;padding:0}
+.tile:disabled{opacity:.2}
+/* quiz */
+.q{font-size:1.35rem;font-weight:700;text-align:center;margin:.6rem 0 1rem}
+.seqshow{font-size:2.3rem;text-align:center;line-height:1.5;word-spacing:.3rem}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.opt{min-height:3.6rem;border-radius:18px;border:3px solid var(--line);background:#fff;font-size:1.15rem;font-weight:700;color:var(--ink);padding:.5rem}
+.opts.emoji .opt{font-size:2.4rem;min-height:4.4rem}
+.opt.right{background:#D3F9D8;border-color:#40C057}
+.opt.miss{background:#FFF4E6;border-color:#FFC078}
+/* results */
+.stars{font-size:3rem;letter-spacing:.3rem}
+.stars .off{filter:grayscale(1);opacity:.3}
+.lvl{font-weight:700;color:var(--acc)}
+/* wellness */
+.breath{width:12rem;height:12rem;border-radius:50%;margin:1rem auto;background:radial-gradient(circle at 35% 35%,#D0EBFF,#4DABF7);display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;font-weight:800;font-size:1.15rem;transform:scale(.62);transition:transform 4s ease-in-out;box-shadow:0 0 40px rgba(77,171,247,.5);text-shadow:0 1px 3px rgba(0,0,0,.3)}
+.glasses{display:flex;flex-wrap:wrap;gap:.45rem}
+.glass{width:3.2rem;height:3.6rem;font-size:1.8rem;border-radius:14px;border:3px solid #A5D8FF;background:#fff;padding:0;filter:grayscale(1);opacity:.45}
+.glass.full{filter:none;opacity:1;background:#E7F5FF}
+.foods{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.6rem}
+.food{background:#FFF9F0;border-radius:16px;padding:.7rem;border:2px solid var(--line)}
+.food b{display:block}
+input[type=text]{width:100%;font-size:1.2rem;padding:.8rem 1rem;border-radius:16px;border:3px solid #FFC078;background:#fff;color:var(--ink)}
+input[type=text]:focus{outline:none;border-color:var(--pri)}
+input[type=range]{width:100%;height:2.4rem;accent-color:var(--pri)}
+.setrow{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.7rem 0;border-bottom:2px solid #F8EDE3}
+.switch{min-width:6rem}
+details summary{font-weight:700;font-size:1.05rem;cursor:pointer;padding:.5rem 0;min-height:2.5rem}
+ul.tips{padding-left:1.2rem} ul.tips li{margin:.4rem 0}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.6rem}
+.badge{text-align:center;padding:.7rem;border-radius:18px;background:#FFF9DB;border:2px solid #FFE066;font-size:.9rem}
+.badge b{display:block;font-size:1rem}
+.badge.locked{filter:grayscale(1);opacity:.45;background:#f6f6f6;border-color:#ddd}
+.badge .be{font-size:2.2rem}
+table.gt{width:100%;border-collapse:collapse}
+table.gt td,table.gt th{padding:.5rem .3rem;border-bottom:2px solid #F8EDE3;text-align:left}
+.chart svg{width:100%;height:auto}
+.hero{font-size:4.5rem;line-height:1;text-align:center}
+.step{display:flex;gap:.8rem;align-items:flex-start;margin:.8rem 0;font-size:1.1rem}
+.step .num{flex:none;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--pri);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.shareicon{display:inline-flex;vertical-align:middle;width:1.6rem;height:1.6rem;border:2px solid #1971C2;border-radius:6px;align-items:center;justify-content:center;color:#1971C2;font-weight:800;font-size:1rem}
+#modal{position:fixed;inset:0;background:rgba(40,20,50,.45);display:flex;align-items:center;justify-content:center;z-index:50;padding:1rem}
+.mbox{background:#fff;border-radius:24px;padding:1.4rem;max-width:480px;width:100%;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.25);animation:pop .35s}
+#toast{position:fixed;left:0;right:0;margin:0 auto;width:fit-content;width:-webkit-fit-content;top:calc(env(safe-area-inset-top) + 4.5rem);z-index:40;max-width:min(92vw,560px);background:#fff;border:3px solid #FFC2D4;color:#7A1E48;font-weight:700;padding:.8rem 1.1rem;border-radius:20px;box-shadow:0 8px 24px rgba(0,0,0,.18);text-align:center;transition:opacity .4s;opacity:0;pointer-events:none}
+#toast.show{opacity:1;pointer-events:auto}
+#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60}
+/* mahjong */
+.mjwrap{overflow-x:auto;padding:.3rem 0 .6rem;-webkit-overflow-scrolling:touch}
+.mjboard{position:relative;margin:0 auto}
+.mjt{position:absolute;padding:0;border-radius:12px;border:2px solid #C9B79C;border-right-width:5px;border-bottom-width:6px;border-right-color:#B08E62;border-bottom-color:#9C7A4E;background:linear-gradient(145deg,#FFFFFF,#FFF4DC);display:flex;align-items:center;justify-content:center;line-height:1;box-shadow:2px 3px 6px rgba(0,0,0,.25);transition:transform .12s}
+.mjt span{pointer-events:none}
+.mjt.blocked{filter:brightness(.78) saturate(.75)}
+.mjt.sel{background:linear-gradient(145deg,#FFF3BF,#FFE066);border-color:#F59F00;transform:translateY(-4px);box-shadow:0 0 0 4px #F59F00,2px 6px 10px rgba(0,0,0,.3)}
+.mjt.hint{animation:glow 1s ease-in-out infinite;border-color:#40C057}
+@keyframes glow{0%,100%{box-shadow:0 0 0 3px #40C057,2px 3px 6px rgba(0,0,0,.25)}50%{box-shadow:0 0 0 7px #8CE99A,2px 3px 6px rgba(0,0,0,.25)}}
+.mjbar{margin:0 0 .6rem}
+.btn.pulse{animation:pop 1s infinite}
+.btn:disabled{opacity:.45}
+[hidden]{display:none!important}
+@media (max-width:420px){html{font-size:19px} html.big{font-size:22px} .card{padding:1rem}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <button class="iconbtn" id="homeBtn" aria-label="Home">🏠</button>
+  <div class="brand">☀️ Bright Mind</div>
+  <button class="iconbtn" id="soundBtn" aria-label="Sound on or off">🔊</button>
+</header>
+<main id="app" aria-live="polite"></main>
+<nav class="bottom" id="nav">
+  <button data-nav="home"><span>🏠</span>Home</button>
+  <button data-nav="wellness"><span>🌿</span>Wellness</button>
+  <button data-nav="progress"><span>📈</span>Progress</button>
+  <button data-nav="settings"><span>⚙️</span>Settings</button>
+</nav>
+<div id="modal" hidden></div>
+<div id="toast" role="status"></div>
+<canvas id="confetti"></canvas>
+<script>
+"use strict";
+/* ============ Content ============ */
+const AFFIRMATIONS=[
+"{n}, your family loves you more than words can say. 💛",
+"Brandon and your family are so proud of you, {n}!",
+"Your grandchildren are lucky to have someone as wonderful as you, {n}.",
+"{n}, the people around you light up when you walk into the room.",
+"You are deeply loved, {n}, today and every day.",
+"Your kindness has touched more hearts than you'll ever know, {n}.",
+"{n}, your family treasures every moment with you.",
+"Your friends are so grateful to have you in their lives, {n}.",
+"{n}, your laugh is one of your family's favorite sounds.",
+"The love you've given your family comes back to you a hundredfold, {n}.",
+"{n}, you are the heart of your family.",
+"Brandon made this just for you, {n}, because you mean the world. 💕",
+"Your family is cheering you on with every puzzle, {n}!",
+"{n}, your wisdom and warmth make everyone around you better.",
+"Somebody is thinking about you with love right now, {n}.",
+"{n}, your stories and memories are treasures to the people who love you.",
+"You make your loved ones feel safe and cared for, {n}.",
+"{n}, your grandchildren will always remember your love.",
+"Every hug you give makes someone's day, {n}.",
+"{n}, you are appreciated more than you know.",
+"Your family is so proud of how you keep learning and growing, {n}.",
+"{n}, your friends love your company and your big heart.",
+"You bring sunshine to the people around you, {n}. ☀️",
+"{n}, you are loved for exactly who you are.",
+"Your family's favorite place is anywhere you are, {n}.",
+"{n}, the love you share keeps your whole family close.",
+"You've made a beautiful difference in so many lives, {n}.",
+"{n}, your encouragement has helped your loved ones through so much.",
+"People smile just thinking about you, {n}.",
+"{n}, you are a blessing to your family and friends.",
+"Your gentle heart is admired by everyone who knows you, {n}.",
+"{n}, your family is grateful for every call, visit, and kind word from you.",
+"You are never alone, {n}. You are surrounded by love.",
+"{n}, your curiosity and spirit inspire the people who love you.",
+"Your grandchildren think you're amazing, {n}, and they're right!",
+"{n}, you have a home in so many hearts.",
+"The world is brighter because you're in it, {n}.",
+"{n}, your family loves seeing you happy and healthy.",
+"Your friends count themselves lucky to know you, {n}.",
+"{n}, you're doing something wonderful for yourself today, and your family loves that.",
+"You are cherished, {n}. Never forget it. 💕",
+"{n}, your love is the thread that ties so many happy memories together.",
+"Everyone who loves you is rooting for you today, {n}!",
+"{n}, you deserve all the love that surrounds you.",
+"Your warm heart is one of your family's greatest gifts, {n}.",
+"{n}, the little things you do mean so much to the people who love you."
+];
+const TIPS=[
+"Aim for 7 to 8 hours of sleep. Sleep helps your brain sort and store memories.",
+"Going to bed and waking up at the same time each day helps your body clock and your mood.",
+"Wind down before bed: dim the lights and set screens aside about an hour before sleep.",
+"Chatting with friends and family is wonderful brain exercise. Why not call someone you love today?",
+"Joining a club, class, or group keeps you connected. Staying social is linked with healthier aging.",
+"Share a meal with someone. Good conversation keeps the mind lively.",
+"A brisk walk of 20 to 30 minutes on most days gets blood flowing to your brain.",
+"Gentle movement like stretching, tai chi, or chair yoga helps balance, mood, and focus.",
+"Dancing mixes music, movement, and memory: a triple treat for your brain!",
+"Short walks count too. Try a little stroll after a meal.",
+"Learning something new, like a language, an instrument, or a craft, builds new brain connections.",
+"Try doing an everyday task a new way, like taking a different route on your walk.",
+"Reading a little every day keeps your vocabulary and imagination strong.",
+"Each evening, think of three good things from your day. Gratitude lifts the mood.",
+"Write a short thank-you note to someone. It brightens two days: theirs and yours!",
+"When you feel tense, try slow breathing: in for 4, out for 6. It calms the body.",
+"Take a few quiet minutes to notice what you can see, hear, and feel. That's mindfulness.",
+"Step outside for some daylight. Morning light helps both sleep and mood.",
+"Ongoing stress is hard on memory. Gentle breathing, walks, and laughter all help.",
+"It's okay to rest and say no sometimes. Taking care of yourself matters.",
+"Laughter really is good for you. Watch a funny show or share a joke with a friend.",
+"Hobbies like gardening, knitting, painting, or puzzles keep both hands and mind busy.",
+"Gardening gives you fresh air, gentle exercise, and something lovely to care for.",
+"Cooking a new recipe is fun exercise for planning and memory.",
+"Listening to music you love can lift your mood and bring back happy memories.",
+"Singing along to your favorite songs is great for breathing, memory, and joy.",
+"Playing or learning an instrument is excellent brain exercise at any age.",
+"Keep a calendar or notebook handy. Writing things down frees your mind to focus.",
+"Regular hearing and vision checkups help you stay engaged with the world around you.",
+"Variety is the spice of brain health: mix up your puzzles, activities, and conversations.",
+"Be kind to yourself. Forgetting a name now and then happens to everyone.",
+"Volunteering brings purpose and connection, two lovely gifts for your wellbeing.",
+"Regular checkups with your doctor help keep blood pressure and blood sugar healthy, which is good for your brain too.",
+"A few minutes of puzzles every day adds up. Little and often is the secret!",
+"Spending time in nature, even a park bench or a garden, can lower stress and refresh the mind."
+];
+const NUTRITION=[
+["🥬","Leafy greens","Spinach, kale, and lettuce are brain superstars. Try a serving most days."],
+["🫐","Berries","Blueberries and strawberries are full of antioxidants. Enjoy them a few times a week."],
+["🥜","Nuts","A small handful of nuts makes a great brain-healthy snack."],
+["🐟","Fish","Salmon, sardines, or trout once or twice a week give you healthy omega-3 fats."],
+["🫒","Olive oil","Cook with olive oil instead of butter when you can."],
+["🌾","Whole grains","Oatmeal, brown rice, and whole-wheat bread give steady energy."],
+["🫘","Beans & lentils","Full of fiber and protein. Lovely in soups and salads."],
+["🥦","Colorful veggies","Try to eat a rainbow of vegetables every day."],
+["🍗","Poultry","Chicken or turkey is a lean choice a couple of times a week."]
+];
+const LIMITS="Go easy on sweets, sugary drinks, fried foods, fast food, red and processed meats, butter, and cheese. Enjoy them as occasional treats.";
+const WATER_TIPS=[
+"Your brain is mostly water! Even mild dehydration can make you feel tired or foggy.",
+"As we get older we don't always feel thirsty, so sip water regularly through the day.",
+"Keep a glass or bottle of water where you can see it as a friendly reminder.",
+"Watermelon, cucumber, oranges, and soups count toward your fluids too.",
+"Herbal tea counts toward your daily fluids as well.",
+"Try a glass of water with each meal and one between meals."
+];
+const DOCTOR_NOTE="These are general healthy-living tips. Always follow your own doctor's advice, especially about how much fluid is right for you, your diet, and any medications.";
+const PRAISE=["Wonderful, {n}!","Brilliant!","You got it, {n}!","Fantastic!","Look at you go, {n}!","Superb!","That's right! 🌟","Beautiful work, {n}!","Sharp as a tack!","Yes! Well done!","Marvelous, {n}!","Spot on! ✨"];
+const GENTLE=["Nice try, {n}! Let's try another.","So close! You're doing great.","That's okay. Every try helps your brain grow.","Good effort! Let's keep going.","No worries, {n}. Onward!"];
+
+const GAMES=[
+{id:"memory",name:"Memory Match",emoji:"🃏",color:"#E5DBFF",skill:"Visual memory",desc:"Find the matching pairs",help:"Tap two cards to turn them over and find all the matching pairs. Take your time, there's no clock!"},
+{id:"speed",name:"Quick Spot",emoji:"⚡",color:"#FFF3BF",skill:"Processing speed",desc:"Spot the picture quickly",help:"Look at the picture at the top, then tap the same picture in the grid as quickly as feels comfortable. Speed-of-processing practice like this was studied with older adults in the large ACTIVE study."},
+{id:"sequence",name:"Color Echo",emoji:"🎵",color:"#D3F9D8",skill:"Working memory",desc:"Repeat the colors and sounds",help:"Watch and listen as the colors light up, then tap them back in the same order. Each round adds one more!"},
+{id:"words",name:"Word Jumble",emoji:"🔤",color:"#FFE3E3",skill:"Language",desc:"Unscramble the letters",help:"Tap the letters in order to spell the word, using the clue to help. Tap a letter in your answer to take it back. Hints are always welcome!"},
+{id:"math",name:"Number Fun",emoji:"🔢",color:"#D0EBFF",skill:"Mental math",desc:"Friendly number puzzles",help:"Work out each answer in your head and tap your choice. No rush at all!"},
+{id:"pattern",name:"Pattern Puzzles",emoji:"🧩",color:"#FFE8CC",skill:"Reasoning",desc:"What comes next? Odd one out?",help:"Look carefully for the pattern, or spot the one that doesn't belong."},
+{id:"mahjong",name:"Mahjong Tiles",emoji:"🀄",color:"#C3FAE8",skill:"Attention & visual memory",desc:"Match pairs of open tiles",help:"Find two matching tiles that are <b>open</b> and tap them both to clear them. A tile is open when nothing is stacked on top of it and its left or right side is free. Open tiles look bright; tucked-in tiles look a little shaded. Scanning for matches is lovely practice for attention and visual memory. No clock, and Hint, Shuffle, and Undo are always there to help!"},
+{id:"trivia",name:"Memory Lane Trivia",emoji:"📻",color:"#FCC2D7",skill:"Long-term memory",desc:"Music, TV and the good old days",help:"Fun questions about music, TV, and the world. Guessing is part of the fun!",fixed:true}
+];
+const GMAP={};GAMES.forEach(g=>GMAP[g.id]=g);
+
+const WORDS={
+4:[["ROSE","A lovely flower"],["CAKE","A birthday treat"],["BIRD","It sings in the trees"],["RAIN","Falls from the clouds"],["MILK","Goes well with cookies"],["BOOK","You read it"],["LAMP","Gives you light"],["FISH","Swims in water"],["SOUP","A warm bowl on a cold day"],["TREE","Has leaves and branches"],["MOON","Shines at night"],["BELL","It rings"],["KITE","Flies in the wind"],["PEAR","A sweet fruit"],["STAR","Twinkles in the sky"],["SNOW","Cold and white"]],
+5:[["APPLE","Keeps the doctor away"],["BREAD","Baked in a loaf"],["CHAIR","You sit on it"],["DANCE","Move to the music"],["GRAPE","Grows in bunches"],["HEART","A symbol of love"],["HOUSE","A place to live"],["LEMON","A sour yellow fruit"],["MUSIC","Songs and melodies"],["PIANO","An instrument with keys"],["SMILE","A happy face"],["TULIP","A spring flower"],["WATER","Drink some every day!"],["BEACH","Sand and waves"],["QUILT","A cozy patchwork blanket"],["PEACH","A fuzzy fruit"]],
+6:[["GARDEN","Where flowers grow"],["FAMILY","The people who love you"],["CANDLE","Glows on a birthday cake"],["BUTTER","Spread it on toast"],["COOKIE","A sweet baked treat"],["FLOWER","Bees love it"],["KITTEN","A baby cat"],["ORANGE","A fruit and a color"],["PICNIC","Lunch on a blanket outside"],["SUMMER","The warmest season"],["TEAPOT","Pours a warm drink"],["WINDOW","You look through it"],["BASKET","Carry things in it"],["RIBBON","Ties a pretty bow"],["CHERRY","Small red fruit with a pit"],["SUNDAY","A day of rest"]],
+7:[["BLANKET","Keeps you cozy"],["BLOSSOM","A flower on a tree"],["KITCHEN","Where meals are made"],["RAINBOW","Colors after the rain"],["SUNRISE","The start of the day"],["HOLIDAY","A special day off"],["PUMPKIN","Orange and round, great in pie"],["CHICKEN","It lays eggs"],["MORNING","Time for breakfast"],["SWEATER","A warm knitted top"],["TEACHER","Works in a classroom"],["LETTUCE","Leafy salad green"],["PRESENT","A wrapped gift"],["JOURNEY","A long trip"]]
+};
+const TRIVIA=[
+["Which band sang \"Hey Jude\"?",["The Beatles","The Monkees","The Beach Boys","The Rolling Stones"]],
+["Who was the first person to walk on the Moon in 1969?",["Neil Armstrong","John Glenn","Buzz Aldrin","Alan Shepard"]],
+["Chubby Checker made which dance famous in 1960?",["The Twist","The Jitterbug","The Hustle","The Mashed Potato"]],
+["Elvis Presley is known as the King of...?",["Rock and Roll","Country","Jazz","Soul"]],
+["Who sang the 1967 hit \"Respect\"?",["Aretha Franklin","Diana Ross","Tina Turner","Dionne Warwick"]],
+["Which TV show starred Lucy and Ricky Ricardo?",["I Love Lucy","The Honeymooners","Bewitched","Leave It to Beaver"]],
+["In the movie \"The Wizard of Oz\", what color are Dorothy's slippers?",["Ruby red","Silver","Emerald green","Gold"]],
+["Which singer was nicknamed \"Ol' Blue Eyes\"?",["Frank Sinatra","Dean Martin","Bing Crosby","Perry Como"]],
+["Which children's TV show features Big Bird?",["Sesame Street","Captain Kangaroo","The Electric Company","Romper Room"]],
+["Who played Maria in the 1965 film \"The Sound of Music\"?",["Julie Andrews","Audrey Hepburn","Doris Day","Natalie Wood"]],
+["Which fashion doll first appeared in 1959?",["Barbie","Raggedy Ann","Cabbage Patch Kid","Chatty Cathy"]],
+["Which cartoon family lived in the town of Bedrock?",["The Flintstones","The Jetsons","The Simpsons","The Addams Family"]],
+["Which planet is known as the Red Planet?",["Mars","Venus","Jupiter","Saturn"]],
+["How many days are in a leap year?",["366","365","364","367"]],
+["What is the largest ocean on Earth?",["Pacific","Atlantic","Indian","Arctic"]],
+["Which country gave the Statue of Liberty to the United States?",["France","England","Italy","Spain"]],
+["Who painted the Mona Lisa?",["Leonardo da Vinci","Michelangelo","Pablo Picasso","Vincent van Gogh"]],
+["What is the capital city of Canada?",["Ottawa","Toronto","Vancouver","Montreal"]],
+["In what year did the Woodstock music festival take place?",["1969","1965","1972","1975"]],
+["Which group sang \"My Girl\" in 1964?",["The Temptations","The Four Tops","The Drifters","The Platters"]],
+["Which TV family said \"Good night, John-Boy\"?",["The Waltons","The Bradys","The Partridges","The Ingalls"]],
+["Which TV western followed the Cartwright family on the Ponderosa ranch?",["Bonanza","Gunsmoke","The Rifleman","Rawhide"]],
+["Which famous ocean liner sank in 1912?",["Titanic","Lusitania","Queen Mary","Britannic"]],
+["How many strings does a standard guitar have?",["6","4","5","8"]],
+["Which flower is famously linked with the Netherlands?",["Tulip","Rose","Daisy","Sunflower"]],
+["What does a caterpillar turn into?",["A butterfly","A beetle","A dragonfly","A bee"]],
+["Which president started the Peace Corps in 1961?",["John F. Kennedy","Dwight Eisenhower","Lyndon Johnson","Richard Nixon"]],
+["Who wrote and first recorded \"I Will Always Love You\"?",["Dolly Parton","Whitney Houston","Loretta Lynn","Patsy Cline"]],
+["Which group sang \"Stop! In the Name of Love\"?",["The Supremes","The Ronettes","The Shirelles","The Marvelettes"]],
+["Which candy \"melts in your mouth, not in your hand\"?",["M&M's","Hershey's Kisses","Milk Duds","Junior Mints"]],
+["How many players does a baseball team have on the field?",["9","11","10","7"]],
+["Which hit 1964 musical film starred Rex Harrison and Audrey Hepburn?",["My Fair Lady","West Side Story","Mary Poppins","Oliver!"]],
+["What is the tallest animal in the world?",["Giraffe","Elephant","Camel","Moose"]],
+["Which ingredient makes bread rise?",["Yeast","Salt","Sugar","Baking soda"]],
+["Who sang \"Sweet Caroline\" in 1969?",["Neil Diamond","Elton John","Johnny Cash","Paul Anka"]]
+];
+
+const CATS=[
+{n:"fruits",e:["🍎","🍌","🍇","🍓","🍊","🍐","🍒","🍋","🍉","🍍"]},
+{n:"animals",e:["🐶","🐱","🐰","🐻","🐼","🦊","🐮","🐷","🐸","🐵"]},
+{n:"vehicles",e:["🚗","🚌","🚲","🚂","🚕","🚜","🚑","🚒","🚛","🛵"]},
+{n:"weather",e:["☀️","🌧️","⛄","🌈","⚡","☁️","❄️","🌪️"]},
+{n:"sports balls",e:["⚽","🏀","🎾","🏈","⚾","🏐","🎱"]},
+{n:"musical instruments",e:["🎹","🎸","🎺","🎻","🥁","🎷"]},
+{n:"flowers",e:["🌸","🌻","🌷","🌹","🌼","🌺"]},
+{n:"clothes",e:["👕","👗","👖","🧣","🧤","👒","🧦","👔"]},
+{n:"vegetables",e:["🥕","🌽","🥦","🥔","🍆","🥒","🌶️","🧅"]}
+];
+const MEM_ICONS=["🌸","🌻","🍓","🐱","🐶","🦋","🍎","🌈","⭐","🎈","🐦","🍋","🌷","🐞","🍒","☕","🎁","🐝"];
+const SPEED_SETS=[["🍎","🍌","🍇","🍊","🍓","🍐","🍒","🍋","🥕","🌽","🍄","🥦","🍉","🍍","🥝","🥥"],["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐨","🐯","🦁","🐮","🐷","🐸","🐵","🐔"]];
+const SIMON_PADS=[{c:"#FA5252",f:329.63,n:"Red"},{c:"#339AF0",f:392.0,n:"Blue"},{c:"#40C057",f:493.88,n:"Green"},{c:"#FCC419",f:587.33,n:"Yellow"}];
+
+const BADGES=[
+{id:"first",e:"🌱",n:"First Steps",d:"Play your first game"},
+{id:"g10",e:"🌟",n:"Ten Games",d:"Play 10 games"},
+{id:"g25",e:"🏅",n:"Quarter Century",d:"Play 25 games"},
+{id:"g50",e:"🏆",n:"Fifty Games",d:"Play 50 games"},
+{id:"g100",e:"👑",n:"Brain Champion",d:"Play 100 games"},
+{id:"explorer",e:"🧭",n:"Explorer",d:"Try every game"},
+{id:"s3",e:"🔥",n:"3-Day Streak",d:"Play 3 days in a row"},
+{id:"s7",e:"🌈",n:"Week of Wonder",d:"Play 7 days in a row"},
+{id:"s30",e:"💎",n:"Month of Magic",d:"Play 30 days in a row"},
+{id:"pb",e:"🚀",n:"Personal Best",d:"Beat your own best score"},
+{id:"perfect",e:"💯",n:"Perfect Round",d:"Get a perfect score"},
+{id:"workout",e:"💪",n:"Daily Brain Games",d:"Finish all 3 of today's Brain Games"},
+{id:"mahjong",e:"🀄",n:"Tile Matcher",d:"Finish a game of Mahjong Tiles"},
+{id:"mahjong3",e:"🐉",n:"Mahjong Marvel",d:"Finish Mahjong Tiles at level 3 or higher"},
+{id:"lvl5",e:"🎓",n:"Top Level",d:"Reach level 5 in any game"},
+{id:"water",e:"💧",n:"Well Watered",d:"Log 8 glasses of water in a day"},
+{id:"calm",e:"🧘",n:"Calm & Centered",d:"Finish a breathing exercise"},
+{id:"grateful",e:"🙏",n:"Grateful Heart",d:"Write down 3 things you're grateful for"}
+];
+
+/* ============ State ============ */
+const KEY="brightMind.v1";
+const DEF={name:"",set:{muted:false,vol:0.7,big:false,water:true},hist:[],days:[],games:{},water:{},badges:{},grat:{},workout:{},hintSeen:false,bestStreak:0,created:0};
+function clone(o){return JSON.parse(JSON.stringify(o))}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&typeof s==="object"){const m=Object.assign(clone(DEF),s);m.set=Object.assign({},DEF.set,s.set||{});return m}}catch(e){}const d=clone(DEF);d.created=Date.now();return d}
+let S=load();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+function today(d){d=d||new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+function shuffle(a,r){r=r||Math.random;a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function N(){return esc(S.name||"friend")}
+function fill(t){return t.replace(/\{n\}/g,N())}
+function aff(){return fill(rnd(AFFIRMATIONS))}
+function tip(){return rnd(TIPS)}
+function praise(){return fill(rnd(PRAISE))}
+function gentle(){return fill(rnd(GENTLE))}
+function seeded(str){let h=1779033703^str.length;for(let i=0;i<str.length;i++){h=Math.imul(h^str.charCodeAt(i),3432918353);h=h<<13|h>>>19}return function(){h=Math.imul(h^(h>>>16),2246822507);h=Math.imul(h^(h>>>13),3266489909);return((h^=h>>>16)>>>0)/4294967296}}
+function isStandalone(){return window.navigator.standalone===true||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches)}
+function isIOS(){return /iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1)}
+
+/* ============ Sound (Web Audio, no files) ============ */
+const sfx=(function(){
+  let ctx=null,master=null;
+  function get(){
+    if(!ctx){const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;
+      try{ctx=new C();master=ctx.createGain();master.connect(ctx.destination)}catch(e){ctx=null;return null}}
+    applyVol();
+    if(ctx.state!=="running"){try{ctx.resume()}catch(e){}}
+    return ctx;
+  }
+  function applyVol(){if(master)master.gain.value=S.set.muted?0:S.set.vol}
+  function unlock(){const c=get();if(!c)return;try{const b=c.createBuffer(1,1,22050);const s=c.createBufferSource();s.buffer=b;s.connect(c.destination);s.start(0)}catch(e){}}
+  function tone(f,t0,dur,type,vol,f2){
+    if(S.set.muted)return;const c=get();if(!c)return;
+    try{const o=c.createOscillator(),g=c.createGain();o.type=type||"sine";const st=c.currentTime+0.02+t0;
+      o.frequency.setValueAtTime(f,st);if(f2)o.frequency.exponentialRampToValueAtTime(f2,st+dur*0.8);
+      g.gain.setValueAtTime(0.0001,st);g.gain.exponentialRampToValueAtTime(vol||0.2,st+0.015);g.gain.exponentialRampToValueAtTime(0.0001,st+dur);
+      o.connect(g);g.connect(master);o.start(st);o.stop(st+dur+0.05)}catch(e){}
+  }
+  return{unlock,applyVol,
+    pop(){tone(520,0,0.1,"sine",0.22,900)},
+    chime(){[1046.5,1318.5,1568].forEach((f,i)=>tone(f,i*0.08,0.4,"triangle",0.2))},
+    sparkle(){[1568,1760,2093,2349,2637,3136].forEach((f,i)=>tone(f,i*0.05,0.3,"sine",0.12))},
+    levelup(){[523.25,659.25,783.99,1046.5,1318.5].forEach((f,i)=>tone(f,i*0.08,0.22,"square",0.06));[2093,2637,3136,4186].forEach((f,i)=>tone(f,0.42+i*0.05,0.3,"sine",0.08))},
+    fanfare(){[523.25,659.25,783.99,1046.5].forEach((f,i)=>tone(f,i*0.13,0.24,"triangle",0.22));[523.25,659.25,783.99,1046.5].forEach(f=>tone(f,0.58,1.0,"triangle",0.11));[2093,2637,3136,2637,3136].forEach((f,i)=>tone(f,0.65+i*0.07,0.3,"sine",0.06))},
+    soft(){tone(440,0,0.25,"sine",0.1);tone(392,0.14,0.35,"sine",0.09)},
+    note(f,d){tone(f,0,d||0.4,"triangle",0.26)},
+    bubble(){tone(380,0,0.14,"sine",0.22,900);tone(620,0.11,0.14,"sine",0.16,1300)},
+    breathe(up){tone(up?261.63:329.63,0,1.6,"sine",0.07,up?329.63:261.63)}
+  };
+})();
+["touchend","pointerdown","click","keydown"].forEach(ev=>document.addEventListener(ev,sfx.unlock,{passive:true}));
+
+/* ============ UI helpers ============ */
+let token=0;
+function later(fn,ms){const t=token;return setTimeout(()=>{if(t===token)fn()},ms)}
+function render(html){$("#app").innerHTML=html}
+function setNav(n){$$("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.nav===n))}
+function go(fn){token++;closeModal();window.scrollTo(0,0);fn()}
+function fb(msg,kind){const e=$("#fb");if(!e)return;e.textContent="";e.className="fb "+(kind||"");e.innerHTML=msg}
+function status(msg){const e=$("#status");if(e)e.innerHTML=msg}
+let toastT=null;
+function toast(msg,ms){const t=$("#toast");t.innerHTML=msg;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),ms||5000)}
+function modal(html){const m=$("#modal");m.innerHTML='<div class="mbox" role="dialog" aria-modal="true">'+html+"</div>";m.hidden=false}
+function closeModal(){const m=$("#modal");m.hidden=true;m.innerHTML=""}
+function applySettings(){document.documentElement.classList.toggle("big",!!S.set.big);$("#soundBtn").textContent=S.set.muted?"🔇":"🔊";sfx.applyVol()}
+
+function confetti(count){
+  if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const cv=$("#confetti"),c=cv.getContext("2d"),dpr=window.devicePixelRatio||1;
+  cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;c.setTransform(dpr,0,0,dpr,0,0);
+  const cols=["#FF922B","#F06595","#FCC419","#51CF66","#339AF0","#845EF7"],shapes=["⭐","💖","✨"];
+  const P=[];for(let i=0;i<(count||110);i++)P.push({x:Math.random()*innerWidth,y:-20-Math.random()*innerHeight*0.5,vx:(Math.random()-0.5)*3,vy:2+Math.random()*3.5,r:Math.random()*6.28,vr:(Math.random()-0.5)*0.2,s:6+Math.random()*8,c:rnd(cols),e:Math.random()<0.18?rnd(shapes):null});
+  const start=performance.now();
+  (function frame(now){const el=now-start;c.clearRect(0,0,innerWidth,innerHeight);
+    P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=0.03;p.r+=p.vr;c.save();c.translate(p.x,p.y);c.rotate(p.r);c.globalAlpha=el>2600?Math.max(0,1-(el-2600)/700):1;
+      if(p.e){c.font=(p.s*2.4)+"px sans-serif";c.fillText(p.e,0,0)}else{c.fillStyle=p.c;c.fillRect(-p.s/2,-p.s/4,p.s,p.s/2)}c.restore()});
+    if(el<3300)requestAnimationFrame(frame);else c.clearRect(0,0,innerWidth,innerHeight)})(start);
+}
+
+/* ============ Progress logic ============ */
+function gstat(id){return S.games[id]||(S.games[id]={best:0,plays:0,level:1})}
+function streak(){const set=new Set(S.days);const d=new Date();if(!set.has(today(d)))d.setDate(d.getDate()-1);let s=0;while(set.has(today(d))){s++;d.setDate(d.getDate()-1)}return s}
+function dailyIds(){const r=seeded("bm"+today());return shuffle(GAMES.map(g=>g.id),r).slice(0,3)}
+function doneToday(){return S.workout[today()]||[]}
+function waterToday(){return S.water[today()]||0}
+function avg(a){return a.length?a.reduce((x,y)=>x+y,0)/a.length:0}
+function improvement(){
+  const h=S.hist;if(h.length<6)return null;
+  const k=Math.min(5,Math.floor(h.length/2));
+  const first=avg(h.slice(0,k).map(x=>x.p)),last=avg(h.slice(-k).map(x=>x.p));
+  return Math.round((last-first)/Math.max(first,1)*100);
+}
+function improvementMsg(){
+  const p=improvement();
+  if(p===null){const left=6-S.hist.length;return `Play ${left} more game${left===1?"":"s"} and I'll show you how much you're improving, ${N()}! 🌱`}
+  if(p>0)return `🎉 You've improved <b>${p}%</b> since you started, ${N()}! Your brain is getting stronger.`;
+  if(p===0)return `You're holding steady and strong, ${N()}! Steady practice is exactly what keeps a mind bright. 💪`;
+  return `Your games have been a bit more challenging lately (the levels go up as you improve!). Every game you play is good exercise, ${N()}. 💛`;
+}
+function award(id,list){if(!S.badges[id]){S.badges[id]=today();list.push(id)}}
+function checkBadges(ctx){
+  const L=[];const n=S.hist.length,st=streak();
+  if(n>=1)award("first",L);if(n>=10)award("g10",L);if(n>=25)award("g25",L);if(n>=50)award("g50",L);if(n>=100)award("g100",L);
+  if(GAMES.every(g=>gstat(g.id).plays>0))award("explorer",L);
+  if(st>=3)award("s3",L);if(st>=7)award("s7",L);if(st>=30)award("s30",L);
+  if(ctx&&ctx.pb)award("pb",L);if(ctx&&ctx.perfect)award("perfect",L);
+  if(dailyIds().every(id=>doneToday().includes(id)))award("workout",L);
+  if(gstat("mahjong").plays>0)award("mahjong",L);
+  if(S.hist.some(h=>h.g==="mahjong"&&h.l>=3))award("mahjong3",L);
+  if(GAMES.some(g=>gstat(g.id).level>=5))award("lvl5",L);
+  if(waterToday()>=8)award("water",L);
+  return L;
+}
+function badgeHTML(ids){return ids.map(id=>{const b=BADGES.find(x=>x.id===id);return `<div class="badge"><div class="be">${b.e}</div><b>${b.n}</b>${b.d}</div>`}).join("")}
+
+/* ============ Screens ============ */
+function greeting(){const h=new Date().getHours();return h<12?"Good morning":h<17?"Good afternoon":"Good evening"}
+
+function showWelcome(){
+  setNav("");
+  render(`<section class="card center">
+    <div class="hero">☀️🧠💛</div>
+    <h1>Welcome to Bright Mind!</h1>
+    <p class="big">A cheerful place for brain games, helpful tips, and lots of love, made just for you by someone who cares about you very much. 💕</p>
+    <p style="margin-top:1rem"><label for="nameIn"><b>What's your name?</b></label></p>
+    <input type="text" id="nameIn" autocomplete="given-name" placeholder="Type your first name" maxlength="30">
+    <div class="row center"><button class="btn wide" id="startBtn">Let's begin! ✨</button></div>
+  </section>`);
+  const go2=()=>{const v=$("#nameIn").value.trim();if(!v){$("#nameIn").focus();toast("Please type your name so I know what to call you 😊",3000);return}
+    S.name=v.slice(0,30);if(!S.created)S.created=Date.now();save();sfx.fanfare();confetti(80);
+    if(!isStandalone()&&!S.hintSeen)go(()=>showInstallHint(true));else go(showHome)};
+  $("#startBtn").onclick=go2;$("#nameIn").addEventListener("keydown",e=>{if(e.key==="Enter")go2()});
+}
+
+let deferredPrompt=null;
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e});
+function showInstallHint(first){
+  setNav(first?"":"settings");
+  let body;
+  if(isStandalone()){body=`<p class="big">🎉 Bright Mind is already installed on this device. You're all set!</p>`}
+  else if(isIOS()){body=`
+    <p>Put Bright Mind on your Home Screen so it opens like an app, with one tap:</p>
+    <div class="step"><div class="num">1</div><div>Open this page in <b>Safari</b>.</div></div>
+    <div class="step"><div class="num">2</div><div>Tap the <b>Share</b> button <span class="shareicon">↑</span> (at the bottom of the screen on iPhone, at the top on iPad).</div></div>
+    <div class="step"><div class="num">3</div><div>Scroll down and tap <b>"Add to Home Screen"</b> ➕.</div></div>
+    <div class="step"><div class="num">4</div><div>Tap <b>"Add"</b>. Then open Bright Mind from the sunny icon on your Home Screen! ☀️</div></div>
+    <p class="note">Tip: once it's on your Home Screen it works even without the internet.</p>`}
+  else{body=`
+    <p>You can install Bright Mind so it opens like an app:</p>
+    ${deferredPrompt?`<div class="row center"><button class="btn green" id="instBtn">📲 Install Bright Mind</button></div>`:""}
+    <div class="step"><div class="num">1</div><div>Open your browser's menu (⋮ or ⋯).</div></div>
+    <div class="step"><div class="num">2</div><div>Choose <b>"Add to Home screen"</b> or <b>"Install app"</b>.</div></div>
+    <p class="note">On an iPhone or iPad, open this page in Safari and use Share ↑ then "Add to Home Screen".</p>`}
+  render(`<section class="card">
+    <div class="hero">📲</div>
+    <h2 class="center">${first?`Lovely to meet you, ${N()}!`:"Add Bright Mind to your Home Screen"}</h2>
+    ${body}
+    <div class="row center"><button class="btn wide" id="hintOk">${first?"Got it, let's play! 🎮":"Done"}</button></div>
+  </section>`);
+  if($("#instBtn"))$("#instBtn").onclick=async()=>{try{deferredPrompt.prompt();await deferredPrompt.userChoice}catch(e){}deferredPrompt=null};
+  $("#hintOk").onclick=()=>{S.hintSeen=true;save();go(first?showHome:showSettings)};
+}
+
+function gameCard(g,done){const gs=gstat(g.id);return `<button class="gcard ${done?"done":""}" data-game="${g.id}">
+  <span class="ge" style="background:${g.color}">${g.emoji}</span>
+  <span><b>${g.name} ${done?"✅":""}</b><small>${g.desc}</small><small>${g.skill}${g.fixed?"":" · Level "+gs.level}</small></span></button>`}
+
+function waterHTML(){
+  const w=waterToday();let h="";for(let i=0;i<8;i++)h+=`<button class="glass ${i<w?"full":""}" data-glass="${i}" aria-label="Glass ${i+1}">💧</button>`;
+  return `<div class="glasses">${h}</div><p class="muted" id="waterMsg">${w>=8?`Wonderful, ${N()}! You've had ${w} glasses today. 🎉`:`${w} of 8 glasses today. Tap a drop each time you have a glass.`}</p>`;
+}
+function bindWater(){
+  $$("[data-glass]").forEach(b=>b.onclick=()=>{const i=+b.dataset.glass;let w=waterToday();w=(i<w&&i===w-1)?i:i+1;setWater(w)});
+}
+function setWater(w){
+  const before=waterToday();S.water[today()]=clamp(w,0,12);const L=checkBadges();save();
+  if(w>before){sfx.bubble();if(w>=8&&before<8){confetti(70);sfx.fanfare();toast(`💧 8 glasses! Your brain says thank you, ${N()}!`)}}else sfx.pop();
+  $$(".waterbox").forEach(el=>{el.innerHTML=waterHTML()});bindWater();
+  if(L.length)toast("🏅 New badge: "+L.map(id=>BADGES.find(b=>b.id===id).n).join(", "));
+}
+
+function showHome(){
+  if(!S.name)return showWelcome();
+  setNav("home");
+  const wk=dailyIds(),dn=doneToday(),st=streak(),wdone=wk.filter(id=>dn.includes(id)).length;
+  render(`
+  <section class="card">
+    <h1>${greeting()}, ${N()}! 👋</h1>
+    <p>${st>1?`🔥 You're on a <b>${st}-day</b> streak. Amazing!`:dn.length?`You've played <b>${dn.length}</b> game${dn.length===1?"":"s"} today. Wonderful!`:"Ready for some happy brain games today?"}</p>
+  </section>
+  <div class="affirm" id="homeAff">💛 ${aff()}</div>
+  <section class="card">
+    <h2>🌞 Today's Brain Games</h2>
+    <p class="muted">${wdone===3?`All done for today, ${N()}! You're a star! ⭐`:`Three games picked just for today (${wdone} of 3 done).`}</p>
+    <div class="gamegrid">${wk.map(id=>gameCard(GMAP[id],dn.includes(id))).join("")}</div>
+  </section>
+  <section class="card">
+    <h2>🎮 All Games</h2>
+    <div class="gamegrid">${GAMES.map(g=>gameCard(g,false)).join("")}</div>
+  </section>
+  <section class="card">
+    <h2>💧 Water Today</h2>
+    <div class="waterbox">${waterHTML()}</div>
+  </section>
+  <div class="tip">💡 <b>Tip for today:</b> ${TIPS[seeded("tip"+today())()*TIPS.length|0]}</div>
+  <div class="row center"><button class="btn alt" id="breathBtn">🧘 1-minute breathing</button><button class="btn blue" id="moreAff">💕 Another kind word</button></div>
+  `);
+  $$("[data-game]").forEach(b=>b.onclick=()=>go(()=>startGame(b.dataset.game)));
+  bindWater();
+  $("#moreAff").onclick=()=>{$("#homeAff").innerHTML="💛 "+aff();sfx.sparkle()};
+  $("#breathBtn").onclick=()=>go(()=>showWellness("breath"));
+}
+
+function showWellness(focus){
+  setNav("wellness");
+  render(`
+  <section class="card center" id="breathCard">
+    <h2>🧘 Calm Breathing</h2>
+    <p>A gentle minute to relax your body and refresh your mind. Breathe in through your nose, and out slowly through your mouth.</p>
+    <div class="breath" id="breathBall">Ready when you are</div>
+    <div class="row center"><button class="btn alt" id="breathGo">▶️ Start breathing</button></div>
+  </section>
+  <section class="card">
+    <h2>🌷 Gratitude Moment</h2>
+    <p>Gratitude is good for the heart and mind. What are three things you're thankful for today, ${N()}?</p>
+    ${[0,1,2].map(i=>`<p><input type="text" class="grat" maxlength="80" placeholder="${["Someone I love...","Something that made me smile...","Something I'm looking forward to..."][i]}" value="${esc((S.grat[today()]||[])[i]||"")}"></p>`).join("")}
+    <div class="row"><button class="btn green" id="gratSave">💚 Save my gratitude</button></div>
+  </section>
+  <section class="card">
+    <h2>💡 Mind Wellness Tip</h2>
+    <div class="tip" id="tipBox">${tip()}</div>
+    <div class="row"><button class="btn" id="tipMore">✨ Another tip</button></div>
+    <details><summary>See all ${TIPS.length} tips</summary><ul class="tips">${TIPS.map(t=>`<li>${t}</li>`).join("")}</ul></details>
+  </section>
+  <section class="card">
+    <h2>💧 Water</h2>
+    <div class="waterbox">${waterHTML()}</div>
+    <ul class="tips">${WATER_TIPS.map(t=>`<li>${t}</li>`).join("")}</ul>
+  </section>
+  <section class="card">
+    <h2>🥗 Brain-Healthy Eating</h2>
+    <p>The <b>MIND</b> and <b>Mediterranean</b> styles of eating are linked with healthy brain aging. Here are the stars of the plate:</p>
+    <div class="foods">${NUTRITION.map(f=>`<div class="food"><b>${f[0]} ${f[1]}</b>${f[2]}</div>`).join("")}</div>
+    <div class="tip" style="margin-top:.8rem;background:#FFF4E6;border-color:#FFD8A8;color:#6B3A00">🍩 <b>Go easy on:</b> ${LIMITS}</div>
+    <p class="note">🩺 ${DOCTOR_NOTE}</p>
+  </section>`);
+  bindWater();
+  $("#tipMore").onclick=()=>{$("#tipBox").textContent=tip();sfx.sparkle()};
+  $("#gratSave").onclick=()=>{const v=$$(".grat").map(i=>i.value.trim());S.grat[today()]=v;let L=[];if(v.every(x=>x))award("grateful",L);save();sfx.chime();
+    toast(v.some(x=>x)?`Thank you for sharing, ${N()}. A grateful heart is a happy heart. 💚`+(L.length?"<br>🏅 New badge: Grateful Heart!":""):"Write one or more things, whenever you're ready. 💚")};
+  $("#breathGo").onclick=startBreathing;
+  if(focus==="breath")setTimeout(()=>{const el=$("#breathCard");if(el)el.scrollIntoView({behavior:"smooth"})},50);
+}
+function startBreathing(){
+  const ball=$("#breathBall"),btn=$("#breathGo");btn.disabled=true;btn.textContent="Breathing...";
+  const cycles=5;let c=0;
+  function inhale(){if(!ball.isConnected)return;c++;ball.style.transition="transform 4s ease-in-out";ball.style.transform="scale(1)";ball.innerHTML=`Breathe in...<br>(${c} of ${cycles})`;sfx.breathe(true);later(hold,4000)}
+  function hold(){ball.innerHTML="Hold gently...";later(exhale,1500)}
+  function exhale(){ball.style.transition="transform 6s ease-in-out";ball.style.transform="scale(.62)";ball.innerHTML="Breathe out slowly...";sfx.breathe(false);later(()=>{if(c<cycles)inhale();else finish()},6000)}
+  function finish(){ball.innerHTML="Lovely! 🌸";btn.disabled=false;btn.textContent="▶️ Again";const L=[];award("calm",L);save();sfx.chime();
+    toast(`Beautifully done, ${N()}. You took a calm minute just for you. 💙`+(L.length?"<br>🏅 New badge: Calm & Centered!":""))}
+  inhale();
+}
+
+function chartSVG(){
+  const byDay={};S.hist.forEach(h=>{(byDay[h.d]=byDay[h.d]||[]).push(h.p)});
+  let pts=Object.keys(byDay).sort().slice(-14).map(d=>({label:d.slice(5).replace("-","/"),v:Math.round(avg(byDay[d]))}));
+  let title="Average points per day";
+  if(pts.length<2){pts=S.hist.slice(-12).map((h,i)=>({label:"#"+(S.hist.length-Math.min(12,S.hist.length)+i+1),v:h.p}));title="Points per game"}
+  if(pts.length<2)return `<p class="muted">Play a couple of games and your progress chart will appear here! 📈</p>`;
+  const W=640,H=280,L=46,R=16,T=20,B=44,max=Math.max(100,...pts.map(p=>p.v))*1.1;
+  const x=i=>L+i*(W-L-R)/(pts.length-1),y=v=>T+(H-T-B)*(1-v/max);
+  let g="";[0,50,100,150,200].filter(v=>v<=max).forEach(v=>{g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="#F1D9C2" stroke-width="2"/><text x="${L-8}" y="${y(v)+6}" font-size="16" text-anchor="end" fill="#594C6B">${v}</text>`});
+  const line=pts.map((p,i)=>`${x(i)},${y(p.v)}`).join(" ");
+  const area=`${x(0)},${y(0)} ${line} ${x(pts.length-1)},${y(0)}`;
+  const step=Math.ceil(pts.length/7);
+  const dots=pts.map((p,i)=>`<circle cx="${x(i)}" cy="${y(p.v)}" r="7" fill="#F76707" stroke="#fff" stroke-width="3"/>`+(i%step===0||i===pts.length-1?`<text x="${x(i)}" y="${H-14}" font-size="16" text-anchor="middle" fill="#594C6B">${p.label}</text>`:"")).join("");
+  return `<p class="muted">${title}</p><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Progress chart">${g}<polygon points="${area}" fill="rgba(255,146,43,.18)"/><polyline points="${line}" fill="none" stroke="#F76707" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>${dots}</svg>`;
+}
+
+function showProgress(){
+  setNav("progress");
+  const st=streak(),nb=Object.keys(S.badges).length;
+  const recent=S.hist.slice(-6).reverse();
+  render(`
+  <section class="card">
+    <h1>📈 Your Progress, ${N()}</h1>
+    <div class="stats">
+      <div class="stat"><b>${S.hist.length}</b>Games played</div>
+      <div class="stat"><b>${st}</b>Day streak 🔥</div>
+      <div class="stat"><b>${Math.max(S.bestStreak||0,st)}</b>Best streak</div>
+      <div class="stat"><b>${S.days.length}</b>Days played</div>
+      <div class="stat"><b>${nb}</b>Badges 🏅</div>
+    </div>
+  </section>
+  <div class="affirm">${improvementMsg()}</div>
+  <section class="card chart"><h2>📊 Improvement</h2>${chartSVG()}</section>
+  <section class="card"><h2>🎮 Your Games</h2>
+    <table class="gt"><tr><th>Game</th><th>Played</th><th>Best</th><th>Level</th></tr>
+    ${GAMES.map(g=>{const s=gstat(g.id);return `<tr><td>${g.emoji} ${g.name}</td><td>${s.plays}</td><td>${s.best||"-"}</td><td>${g.fixed?"-":s.level}</td></tr>`}).join("")}</table>
+    <p class="muted">Levels rise gently as you do well, and ease up if a game feels tricky.</p>
+  </section>
+  <section class="card"><h2>🏅 Badges</h2><div class="badges">${BADGES.map(b=>`<div class="badge ${S.badges[b.id]?"":"locked"}"><div class="be">${b.e}</div><b>${b.n}</b>${b.d}</div>`).join("")}</div></section>
+  ${recent.length?`<section class="card"><h2>🕰️ Recent Games</h2><ul class="tips">${recent.map(h=>`<li>${GMAP[h.g].emoji} ${GMAP[h.g].name}: <b>${h.p}</b> points (${h.d.slice(5).replace("-","/")})</li>`).join("")}</ul></section>`:""}
+  `);
+}
+
+function showSettings(){
+  setNav("settings");
+  render(`
+  <section class="card">
+    <h1>⚙️ Settings</h1>
+    <p><label for="nameEdit"><b>Your name</b></label></p>
+    <input type="text" id="nameEdit" maxlength="30" value="${N()}">
+    <div class="row"><button class="btn green" id="nameSave">Save name</button></div>
+  </section>
+  <section class="card">
+    <div class="setrow"><span><b>🔊 Sounds</b></span><button class="btn switch ${S.set.muted?"ghost":""}" id="sndT">${S.set.muted?"Off":"On"}</button></div>
+    <div class="setrow" style="display:block"><b>🎚️ Volume</b><input type="range" id="vol" min="0" max="1" step="0.05" value="${S.set.vol}" aria-label="Volume"></div>
+    <div class="setrow"><span><b>🔠 Larger text</b></span><button class="btn switch ${S.set.big?"":"ghost"}" id="bigT">${S.set.big?"On":"Off"}</button></div>
+    <div class="setrow"><span><b>💧 Water reminders</b><br><span class="muted">A friendly nudge every 15 minutes of play</span></span><button class="btn switch ${S.set.water?"":"ghost"}" id="watT">${S.set.water?"On":"Off"}</button></div>
+  </section>
+  <section class="card">
+    <div class="row"><button class="btn blue wide" id="instHelp">📲 Add to Home Screen help</button></div>
+    <div class="row"><button class="btn ghost wide" id="resetBtn">Start fresh (clear progress)</button></div>
+    <p class="muted center" style="margin-top:1rem">Bright Mind was made with love by Brandon. 💛<br>Your progress is saved privately on this device.</p>
+  </section>`);
+  $("#nameSave").onclick=()=>{const v=$("#nameEdit").value.trim();if(!v){toast("Please type a name 😊",2500);return}S.name=v.slice(0,30);save();sfx.chime();toast(`Lovely! I'll call you ${N()} from now on. 💛`)};
+  $("#sndT").onclick=()=>{S.set.muted=!S.set.muted;save();applySettings();showSettings()};
+  $("#vol").oninput=e=>{S.set.vol=+e.target.value;sfx.applyVol()};
+  $("#vol").onchange=()=>{save();sfx.chime()};
+  $("#bigT").onclick=()=>{S.set.big=!S.set.big;save();applySettings();showSettings()};
+  $("#watT").onclick=()=>{S.set.water=!S.set.water;save();showSettings()};
+  $("#instHelp").onclick=()=>go(()=>showInstallHint(false));
+  $("#resetBtn").onclick=()=>{if(confirm("Clear all scores, badges and history? Your name and settings will stay.")){const keep={name:S.name,set:S.set,hintSeen:S.hintSeen};S=Object.assign(clone(DEF),keep,{created:Date.now()});save();toast("All fresh and ready! 🌱");go(showHome)}};
+}
+
+/* Water reminder during play */
+let activeMin=0;
+setInterval(()=>{if(document.hidden||!S.name)return;activeMin++;if(S.set.water&&activeMin>=15&&$("#modal").hidden){activeMin=0;waterPrompt()}},60000);
+function waterPrompt(){
+  sfx.bubble();
+  modal(`<div class="hero">💧</div><h2>Time for a glass of water, ${N()}!</h2><p>${rnd(WATER_TIPS)}</p>
+    <div class="row center"><button class="btn blue" id="wYes">I had a glass! 💧</button><button class="btn ghost" id="wNo">Maybe later</button></div>`);
+  $("#wYes").onclick=()=>{closeModal();setWater(waterToday()+1);toast(`Refreshing! ${waterToday()} glass${waterToday()===1?"":"es"} today. 💧`)};
+  $("#wNo").onclick=closeModal;
+}
+/* Occasional loving note */
+setInterval(()=>{if(document.hidden||!S.name||!$("#modal").hidden)return;if(Math.random()<0.5)toast("💛 "+aff(),6000)},4*60000);
+
+/* ============ Game framework ============ */
+function startGame(id){
+  const g=GMAP[id],gs=gstat(id),level=g.fixed?1:gs.level;
+  setNav("home");
+  render(`<section class="card game">
+    <div class="ghead"><h2>${g.emoji} ${g.name}</h2>${g.fixed?"":`<span class="pill">Level ${level}</span>`}</div>
+    <p class="ghelp">${g.help}</p>
+    <div id="status" class="status"></div>
+    <div id="fb" class="fb" aria-live="polite"></div>
+    <div id="area"></div>
+    <div class="row center"><button class="btn ghost" id="quitBtn">🏠 Back to home</button></div>
+  </section>`);
+  $("#quitBtn").onclick=()=>go(showHome);
+  const t=token;
+  GAMEFN[id](level,res=>{if(t!==token)return;finishGame(id,level,res)});
+}
+let correctCount=0;
+function goodFb(extra){correctCount++;fb((correctCount%5===0?"💛 "+aff():praise())+(extra?" "+extra:""),"good")}
+
+function finishGame(id,level,res){
+  const g=GMAP[id],gs=gstat(id);
+  res.norm=clamp(Math.round(res.norm),0,100);
+  const pts=Math.round(res.norm*(1+(level-1)*0.25));
+  const pb=gs.plays>0&&pts>gs.best;
+  gs.best=Math.max(gs.best,pts);gs.plays++;
+  let lvlMsg="",lvlUp=false;
+  if(!g.fixed){
+    if(res.norm>=75&&gs.level<5){gs.level++;lvlUp=true;lvlMsg=`🚀 You're ready for a little more challenge: Level ${gs.level} next time!`}
+    else if(res.norm<40&&gs.level>1){gs.level--;lvlMsg=`🌱 We'll make the next round a little gentler. You're doing great!`}
+  }
+  S.hist.push({d:today(),t:Date.now(),g:id,n:res.norm,p:pts,l:level});
+  if(S.hist.length>2000)S.hist.splice(0,S.hist.length-2000);
+  if(!S.days.includes(today()))S.days.push(today());
+  const dn=S.workout[today()]=S.workout[today()]||[];if(!dn.includes(id))dn.push(id);
+  S.bestStreak=Math.max(S.bestStreak||0,streak());
+  const newB=checkBadges({pb,perfect:res.norm>=100});
+  save();
+  showResults(g,res,pts,pb,lvlMsg,lvlUp,newB);
+}
+
+function showResults(g,res,pts,pb,lvlMsg,lvlUp,newB){
+  const stars=res.norm>=80?3:res.norm>=50?2:1;
+  const wk=dailyIds(),dn=doneToday();
+  const nextId=wk.find(id=>!dn.includes(id));
+  const gamesToday=S.hist.filter(h=>h.d===today()).length;
+  render(`<section class="card center">
+    <div class="stars">${"⭐".repeat(stars)}<span class="off">${"⭐".repeat(3-stars)}</span></div>
+    <h1>${rnd(["Wonderful job","Fantastic","Bravo","Well done","Amazing work","Hooray"])}, ${N()}! 🎉</h1>
+    <p style="font-size:1.2rem">${res.detail}</p>
+    <p>Points: <b style="font-size:1.4rem;color:var(--pri)">${pts}</b> ${pb?'<span class="pill gold">🏆 New personal best!</span>':""}</p>
+    ${lvlMsg?`<p class="lvl">${lvlMsg}</p>`:""}
+    ${stars===1?`<p>Every game you play is exercise for your brain. You showed up, and that's what counts! 💪</p>`:""}
+  </section>
+  ${newB.length?`<section class="card center"><h2>🏅 New badge${newB.length>1?"s":""}!</h2><div class="badges">${badgeHTML(newB)}</div></section>`:""}
+  <div class="affirm">💛 ${aff()}</div>
+  <div class="tip">💡 <b>Brain tip:</b> ${tip()}</div>
+  ${gamesToday%3===0?`<div class="note">💧 You've played ${gamesToday} games today. A great moment for a sip of water! <button class="btn blue" id="resWater" style="margin-top:.5rem">I had a glass 💧</button></div>`:""}
+  <div class="row center">
+    <button class="btn" id="again">🔁 Play again</button>
+    ${nextId?`<button class="btn alt" id="nextG">Next of today's Brain Games: ${GMAP[nextId].emoji} ${GMAP[nextId].name}</button>`:""}
+    <button class="btn ghost" id="homeR">🏠 Home</button>
+  </div>`);
+  $("#again").onclick=()=>go(()=>startGame(g.id));
+  if(nextId)$("#nextG").onclick=()=>go(()=>startGame(nextId));
+  $("#homeR").onclick=()=>go(showHome);
+  if($("#resWater"))$("#resWater").onclick=e=>{setWater(waterToday()+1);e.target.disabled=true;e.target.textContent="Thank you! 💧"};
+  confetti();sfx.fanfare();
+  if(lvlUp||newB.length)setTimeout(()=>sfx.levelup(),1500);
+}
+
+/* ============ Games ============ */
+const GAMEFN={};
+
+GAMEFN.memory=function(level,done){
+  const pairs=[3,4,6,8,8][level-1],cols=pairs===3?3:4,area=$("#area");
+  const icons=shuffle(MEM_ICONS).slice(0,pairs),deck=shuffle(icons.concat(icons));
+  area.innerHTML=`<div class="mgrid" style="grid-template-columns:repeat(${cols},1fr);max-width:${cols*130}px">`+deck.map((e,i)=>`<button class="mcard" data-i="${i}" aria-label="Card ${i+1}"><span class="front">${e}</span><span class="back">❔</span></button>`).join("")+"</div>";
+  let first=null,lock=false,moves=0,matched=0;
+  const upd=()=>status(`Pairs found: ${matched} of ${pairs} · Turns: ${moves}`);upd();
+  area.querySelectorAll(".mcard").forEach(b=>b.onclick=()=>{
+    if(lock||b.classList.contains("up"))return;sfx.pop();b.classList.add("up");
+    if(!first){first=b;return}
+    moves++;const a=first;first=null;
+    if(deck[a.dataset.i]===deck[b.dataset.i]){matched++;a.classList.add("done");b.classList.add("done");sfx.chime();goodFb();
+      if(matched===pairs){later(()=>done({norm:100*pairs*1.4/moves,detail:`You found all ${pairs} pairs in ${moves} turns!`}),1000)}}
+    else{lock=true;fb(rnd(["Not a match, but now you know where those are! 🧠","Good try! Remember those spots.","Ooh, close! Keep those in mind."]),"soft");
+      later(()=>{a.classList.remove("up");b.classList.remove("up");lock=false},level>=4?900:1200)}
+    upd();
+  });
+};
+
+GAMEFN.speed=function(level,done){
+  const n=[4,6,9,12,16][level-1],cols=n<=4?2:n<=9?3:4,set=SPEED_SETS[level>=4?1:0],rounds=10,area=$("#area");
+  const base=700+n*90;let r=0;const times=[];
+  function round(){
+    if(r>=rounds){const a=avg(times);return done({norm:100-(a-base)/30,detail:`Your average find time was ${(a/1000).toFixed(1)} seconds over ${rounds} rounds. Speedy!`})}
+    r++;status(`Round ${r} of ${rounds}`);
+    const target=rnd(set),items=shuffle([target].concat(shuffle(set.filter(x=>x!==target)).slice(0,n-1)));
+    area.innerHTML=`<div class="target">Find this: <span class="tbig">${target}</span></div><div id="sg"><div class="waiting">Get ready... 👀</div></div>`;
+    later(()=>{
+      $("#sg").innerHTML=`<div class="sgrid" style="grid-template-columns:repeat(${cols},1fr);max-width:${cols*120}px">${items.map(e=>`<button class="scell">${e}</button>`).join("")}</div>`;
+      const t0=performance.now();let got=false;
+      $$("#sg .scell").forEach(b=>b.onclick=()=>{if(got)return;
+        if(b.textContent===target){got=true;const t=performance.now()-t0;times.push(t);b.classList.add("yes");sfx.chime();goodFb(`(${(t/1000).toFixed(1)} sec)`);later(round,900)}
+        else{b.classList.add("nope");sfx.soft();fb(`Almost! Look for the ${target}`,"soft")}});
+    },900);
+  }
+  fb("Take a breath, then find the matching picture. 😊");round();
+};
+
+GAMEFN.sequence=function(level,done){
+  const area=$("#area"),stepMs=Math.max(500,950-level*80),startLen=level<=2?2:3,goal=startLen+6;
+  area.innerHTML=`<div class="simon">${SIMON_PADS.map((p,i)=>`<button class="pad" data-i="${i}" style="background:${p.c}" aria-label="${p.n}"></button>`).join("")}</div><div class="row center"><button class="btn green" id="seqGo">▶️ Start</button></div>`;
+  let seq=[],input=[],accepting=false,misses=0,best=0;
+  for(let i=0;i<startLen;i++)seq.push(ri(0,3));
+  const pads=$$(".pad");
+  function flash(i){const p=pads[i];if(!p)return;p.classList.add("lit");sfx.note(SIMON_PADS[i].f,stepMs*0.6/1000+0.1);later(()=>p.classList.remove("lit"),stepMs*0.6)}
+  function play(){accepting=false;input=[];status(`Sequence length: ${seq.length} · Longest so far: ${best}`);fb("Watch and listen... 👀");
+    seq.forEach((p,i)=>later(()=>flash(p),700+i*stepMs));
+    later(()=>{accepting=true;fb("Your turn! Tap the colors in the same order. 👆")},700+seq.length*stepMs)}
+  function end(){done({norm:best?100*best/goal:5,detail:best?`Your longest sequence was ${best} colors. Great memory work!`:`You gave it a lovely try! Practice makes these sequences easier and easier.`})}
+  pads.forEach(b=>b.onclick=()=>{if(!accepting)return;const i=+b.dataset.i;flash(i);input.push(i);const k=input.length-1;
+    if(input[k]!==seq[k]){accepting=false;misses++;sfx.soft();
+      if(misses>=2){fb(`Nice try, ${N()}! That was a lovely run. 🌟`,"soft");later(end,1500)}
+      else{fb(`Nice try, ${N()}! Let's watch that one again. 😊`,"soft");later(play,1800)}return}
+    if(input.length===seq.length){accepting=false;best=Math.max(best,seq.length);later(()=>{sfx.sparkle();goodFb()},350);
+      if(seq.length>=goal)later(end,1400);else later(()=>{seq.push(ri(0,3));play()},1500)}
+  });
+  $("#seqGo").onclick=e=>{e.target.closest(".row").remove();play()};
+  status("Tap Start when you're ready.");
+};
+
+GAMEFN.words=function(level,done){
+  const area=$("#area");
+  const list=level===1?WORDS[4]:level===2?WORDS[5]:level===3?WORDS[5].concat(WORDS[6]):level===4?WORDS[6]:WORDS[7];
+  const pool=shuffle(list).slice(0,6);let i=0,total=0,solved=0;
+  let w,letters,picks,hints;
+  function next(){
+    if(i>=pool.length)return done({norm:100*total/(pool.length*10),detail:`You unscrambled ${solved} of ${pool.length} words!`});
+    w=pool[i][0];hints=0;picks=[];
+    do{letters=shuffle(w.split(""))}while(letters.join("")===w&&new Set(w).size>1);
+    status(`Word ${i+1} of ${pool.length}`);fb("");draw();
+  }
+  function draw(){
+    area.innerHTML=`<p class="clue">💡 Clue: ${pool[i][1]}</p>
+      <div class="slots">${w.split("").map((_,k)=>`<button class="slot ${picks[k]!==undefined?"filled":""} ${k<hints?"fixed":""}" data-s="${k}">${picks[k]!==undefined?letters[picks[k]]:""}</button>`).join("")}</div>
+      <div class="tiles">${letters.map((l,k)=>`<button class="tile" data-t="${k}" ${picks.includes(k)?"disabled":""}>${l}</button>`).join("")}</div>
+      <div class="row center"><button class="btn alt" id="hintB">💡 Hint</button><button class="btn ghost" id="clearB">↩️ Clear</button><button class="btn ghost" id="skipB">⏭️ Skip</button></div>`;
+    $$(".tile").forEach(b=>b.onclick=()=>{picks.push(+b.dataset.t);sfx.pop();check()});
+    $$(".slot").forEach(b=>b.onclick=()=>{const k=+b.dataset.s;if(k<hints||picks[k]===undefined)return;picks.splice(k,1);sfx.pop();draw()});
+    $("#hintB").onclick=()=>{if(hints>=w.length-1)return;hints++;picks=[];for(let k=0;k<hints;k++){const idx=letters.findIndex((l,j)=>l===w[k]&&!picks.includes(j));picks.push(idx)}sfx.sparkle();fb(`Here's a little help! 😊`);draw()};
+    $("#clearB").onclick=()=>{picks=picks.slice(0,hints);sfx.pop();draw()};
+    $("#skipB").onclick=()=>{fb(`The word was <b>${w}</b>. On to the next one!`,"soft");sfx.soft();i++;$$("#area button").forEach(b=>b.disabled=true);later(next,2200)};
+  }
+  function check(){
+    draw();if(picks.length<w.length)return;
+    const guess=picks.map(k=>letters[k]).join("");
+    $$("#area button").forEach(b=>b.disabled=true);
+    if(guess===w){total+=Math.max(4,10-hints*2);solved++;i++;sfx.chime();goodFb(`<b>${w}</b>!`);later(next,1700)}
+    else{sfx.soft();fb(`Nice try! Those letters make <b>${w.length}</b> letters, but not quite our word. Let's try again. 😊`,"soft");later(()=>{picks=picks.slice(0,hints);draw()},1800)}
+  }
+  next();
+};
+
+/* Multiple-choice runner shared by math, patterns and trivia */
+function runQuiz(qs,done,emoji){
+  const area=$("#area");let i=0,right=0;
+  function next(){
+    if(i>=qs.length)return done({norm:100*right/qs.length,detail:`You answered ${right} of ${qs.length} correctly!`});
+    const q=qs[i];status(`Question ${i+1} of ${qs.length}`);fb("");
+    area.innerHTML=`<div class="q">${q.q}</div><div class="opts ${emoji||q.emoji?"emoji":""}">${q.opts.map((o,k)=>`<button class="opt" data-k="${k}">${o}</button>`).join("")}</div><div class="row center" id="nextRow"></div>`;
+    const btns=$$(".opt");
+    btns.forEach(b=>b.onclick=()=>{const k=+b.dataset.k;btns.forEach(x=>x.disabled=true);
+      if(k===q.a){right++;b.classList.add("right");sfx.chime();goodFb(q.ex||"")}
+      else{b.classList.add("miss");btns[q.a].classList.add("right");sfx.soft();fb(`${gentle()} The answer is <b>${q.opts[q.a]}</b>. ${q.ex||""}`,"soft")}
+      i++;$("#nextRow").innerHTML=`<button class="btn green" id="nextQ">${i>=qs.length?"See my results 🎉":"Next ➜"}</button>`;$("#nextQ").onclick=()=>{sfx.pop();next()};
+    });
+  }
+  next();
+}
+function mcq(q,ans,wrongs,ex,fmt){fmt=fmt||(x=>x);const opts=shuffle([ans].concat(wrongs.slice(0,3)));return{q,opts:opts.map(fmt),a:opts.indexOf(ans),ex}}
+function numWrongs(ans,deltas){const s=new Set();let guard=0;while(s.size<3&&guard++<200){const v=ans+rnd(deltas);if(v>0&&v!==ans)s.add(v)}let k=1;while(s.size<3){if(ans+k!==ans)s.add(ans+k);k++}return Array.from(s)}
+
+function mathQ(level){
+  const types=[["add","sub"],["add","sub","pat","mul"],["add2","sub2","mul","pat","money"],["add2","mul","pat","pat2","money","div"],["two","mul2","pat2","money","div","pat"]][level-1];
+  const t=rnd(types);let q,a,d=[-1,1,-2,2,10,-10,3];
+  if(t==="add"){const x=ri(2,12),y=ri(2,9);q=`${x} + ${y} = ?`;a=x+y}
+  else if(t==="sub"){const x=ri(8,20),y=ri(2,x-2);q=`${x} − ${y} = ?`;a=x-y}
+  else if(t==="add2"){const x=ri(12,60),y=ri(11,39);q=`${x} + ${y} = ?`;a=x+y}
+  else if(t==="sub2"){const x=ri(40,99),y=ri(11,x-10);q=`${x} − ${y} = ?`;a=x-y}
+  else if(t==="mul"){const x=ri(2,9),y=ri(2,10);q=`${x} × ${y} = ?`;a=x*y;d=[-x,x,-1,1,y,-y]}
+  else if(t==="mul2"){const x=ri(11,15),y=ri(3,9);q=`${x} × ${y} = ?`;a=x*y;d=[-x,x,-y,y,10,-10]}
+  else if(t==="div"){const y=ri(2,9),a0=ri(2,10);q=`${y*a0} ÷ ${y} = ?`;a=a0;d=[-1,1,-2,2,3]}
+  else if(t==="two"){const x=ri(2,9),y=ri(2,9),z=ri(1,20);q=`${x} × ${y} + ${z} = ?`;a=x*y+z;d=[-1,1,-x,x,10,-10]}
+  else if(t==="pat"){const s=ri(1,12),st=ri(2,6);const seq=[0,1,2,3].map(k=>s+k*st);q=`What number comes next?<br><span class="seqshow">${seq.join(", ")}, ?</span>`;a=s+4*st;d=[-1,1,st,-st,2];return mcq(q,a,numWrongs(a,d),`(Adding ${st} each time.)`)}
+  else if(t==="pat2"){if(Math.random()<0.5){const s=ri(1,5);const seq=[s,s*2,s*4,s*8];q=`What number comes next?<br><span class="seqshow">${seq.join(", ")}, ?</span>`;a=s*16;return mcq(q,a,numWrongs(a,[-s,s*2,-s*2,s*4,8]),"(Doubling each time.)")}
+    const s=ri(45,70),st=ri(3,8);const seq=[0,1,2,3].map(k=>s-k*st);q=`What number comes next?<br><span class="seqshow">${seq.join(", ")}, ?</span>`;a=s-4*st;return mcq(q,a,numWrongs(a,[-1,1,st,-st,2]),`(Taking away ${st} each time.)`)}
+  else if(t==="money"){const p=ri(1,9)*100+rnd([25,50,75]),pay=p<500?500:1000,item=rnd(["a loaf of bread","a bunch of flowers","a magazine","a cup of coffee","a bag of apples","a birthday card"]);
+    q=`You buy ${item} for $${(p/100).toFixed(2)} and pay with a $${pay/100} bill. How much change do you get?`;a=pay-p;
+    return mcq(q,a,numWrongs(a,[-25,25,-50,50,100,-100]),"",v=>"$"+(v/100).toFixed(2))}
+  return mcq(q,a,numWrongs(a,d),"");
+}
+GAMEFN.math=function(level,done){const qs=[];for(let i=0;i<8;i++)qs.push(mathQ(level));runQuiz(qs,done)};
+
+function patternQ(level){
+  const kinds=level===1?["seq","odd"]:level===2?["seq","odd","seq"]:["seq","odd","num"];
+  const k=rnd(kinds);
+  if(k==="seq"){
+    const pats=[["AB"],["AB","ABC","AAB"],["ABC","AAB","ABB"],["ABCD","AABB","ABBC"],["ABCD","AABBC","ABCB"]][level-1];
+    const p=rnd(pats),uniq=Array.from(new Set(p.split(""))),cat=rnd(CATS),pick=shuffle(cat.e).slice(0,uniq.length+1),map={};
+    uniq.forEach((u,j)=>map[u]=pick[j]);
+    const len=Math.max(p.length*2,5),seq=[];for(let j=0;j<=len;j++)seq.push(map[p[j%p.length]]);
+    const ans=seq[len],opts=shuffle(Array.from(new Set(uniq.map(u=>map[u]).concat([pick[uniq.length]])))).slice(0,4);
+    if(!opts.includes(ans))opts[0]=ans;
+    return{q:`What comes next?<br><span class="seqshow">${seq.slice(0,len).join(" ")} ❓</span>`,opts,a:opts.indexOf(ans),emoji:true,ex:""};
+  }
+  if(k==="odd"){
+    const two=shuffle(CATS).slice(0,2),cnt=level<=2?3:level===3?4:5;
+    const items=shuffle(two[0].e).slice(0,cnt),odd=rnd(two[1].e),opts=shuffle(items.concat([odd]));
+    return{q:"Which one doesn't belong?",opts,a:opts.indexOf(odd),emoji:true,ex:`The others are all ${two[0].n}.`};
+  }
+  const r=rnd(["even","five","ten"]);let nums,odd,why;
+  if(r==="even"){nums=shuffle([2,4,6,8,10,12,14,16,18,20,22,24]).slice(0,3).map(x=>x*(level>=4?3:1));nums=nums.map(x=>x%2?x+1:x);odd=ri(1,20)*2+1;why="The others are all even numbers."}
+  else if(r==="five"){nums=shuffle([5,10,15,20,25,30,35,40,45]).slice(0,3);do{odd=ri(11,49)}while(odd%5===0);why="The others can all be counted by 5s."}
+  else{nums=shuffle([10,20,30,40,50,60,70,80,90]).slice(0,3);do{odd=ri(11,95)}while(odd%10===0);why="The others all end in zero (counting by 10s)."}
+  const opts=shuffle(nums.concat([odd]).map(String));
+  return{q:"Which number doesn't belong?",opts,a:opts.indexOf(String(odd)),ex:why};
+}
+GAMEFN.pattern=function(level,done){const qs=[];for(let i=0;i<8;i++)qs.push(patternQ(level));runQuiz(qs,done)};
+
+GAMEFN.trivia=function(level,done){
+  const qs=shuffle(TRIVIA).slice(0,6).map(t=>{const opts=shuffle(t[1]);return{q:t[0],opts:opts.map(esc),a:opts.indexOf(t[1][0])}});
+  runQuiz(qs,done);
+};
+
+
+/* ===== Mahjong Tiles (solitaire) ===== */
+const MJ_SYMBOLS=["🌸","🌻","🍓","🐱","🐶","🦋","🍎","🌈","⭐","🎈","🐦","🍋","🌷","🐞","🍒","☕","🎁","🐝","🐢","🍄"];
+const MJ_LAYOUTS=[
+ [["####","####","####"],["....",".##.","...."]],
+ [["####","####","####","####"],["....",".##.",".##.","...."]],
+ [["######","######","######","######"],["......",".####.",".####.","......"],["......","..##..","..##..","......"]],
+ [[".######.","########","########",".######."],["........",".######.",".######.","........"],["........","...##...","...##...","........"]],
+ [[".######.","########","########","########",".######."],["........",".######.",".######.",".######.","........"],["........","........","..####..","........","........"],["........","........","...##...","........","........"]]
+];
+function mjPositions(level){
+  const L=MJ_LAYOUTS[level-1],pos=[];
+  L.forEach((rows,z)=>rows.forEach((r,y)=>r.split("").forEach((c,x)=>{if(c==="#")pos.push({x,y,z})})));
+  const W=Math.max(...pos.map(p=>p.x))+1,H=Math.max(...pos.map(p=>p.y))+1;
+  // Portrait screens: turn the layout sideways so tiles can be bigger
+  if(window.innerHeight>window.innerWidth*1.1&&W>H)return pos.map(p=>({x:p.y,y:p.x,z:p.z}));
+  return pos;
+}
+function mjKey(x,y,z){return x+","+y+","+z}
+function mjFreeIn(occ,p){return !occ.has(mjKey(p.x,p.y,p.z+1))&&(!occ.has(mjKey(p.x-1,p.y,p.z))||!occ.has(mjKey(p.x+1,p.y,p.z)))}
+/* Plan a full removal order of the given positions, two free tiles at a time. Assigning each pair a symbol along this order guarantees a solvable deal. */
+function mjPlan(pos){
+  for(let attempt=0;attempt<500;attempt++){
+    const occ=new Set(pos.map(p=>mjKey(p.x,p.y,p.z)));let alive=pos.slice();const pairs=[];let ok=true;
+    while(alive.length){
+      const free=alive.filter(p=>mjFreeIn(occ,p));
+      if(free.length<2){ok=false;break}
+      const a=rnd(free);let rest=free.filter(p=>p!==a);
+      // prefer partners not directly beside each other on the same row, so more of the board opens up
+      const b=rnd(rest);
+      pairs.push([a,b]);[a,b].forEach(p=>occ.delete(mjKey(p.x,p.y,p.z)));alive=alive.filter(p=>p!==a&&p!==b);
+    }
+    if(ok)return pairs;
+  }
+  return null;
+}
+GAMEFN.mahjong=function(level,done){
+  const area=$("#area");
+  let tiles=[],sel=null,undo=[],hints=0,shuffles=0,undos=0,finished=false;
+  const pos=mjPositions(level),plan=mjPlan(pos);
+  const nPairs=pos.length/2,nSym=Math.min(MJ_SYMBOLS.length,level<=2?nPairs:Math.ceil(nPairs*0.7));
+  const syms=shuffle(MJ_SYMBOLS).slice(0,nSym);
+  const pairSyms=shuffle(Array.from({length:nPairs},(_,i)=>syms[i%nSym]));
+  plan.forEach((pr,i)=>pr.forEach(p=>tiles.push({x:p.x,y:p.y,z:p.z,s:pairSyms[i],alive:true})));
+  const W=Math.max(...tiles.map(t=>t.x))+1,H=Math.max(...tiles.map(t=>t.y))+1,maxZ=Math.max(...tiles.map(t=>t.z));
+  area.innerHTML=`<div class="row center mjbar"><button class="btn alt" id="mjHint">💡 Hint</button><button class="btn blue" id="mjShuf">🔀 Shuffle</button><button class="btn ghost" id="mjUndo">↩️ Undo</button></div><div class="mjwrap"><div class="mjboard" id="mjBoard"></div></div>`;
+  const board=$("#mjBoard");
+  tiles.forEach((t,i)=>{const b=document.createElement("button");b.className="mjt";b.dataset.i=i;b.innerHTML=`<span>${t.s}</span>`;b.setAttribute("aria-label","Tile "+t.s);b.onclick=()=>tap(t);t.el=b;board.appendChild(b)});
+  function occ(){return new Set(tiles.filter(t=>t.alive).map(t=>mjKey(t.x,t.y,t.z)))}
+  function isFree(t,o){return mjFreeIn(o||occ(),t)}
+  function size(){
+    const wrapW=Math.min(area.clientWidth||320,860);
+    const land=window.innerWidth>window.innerHeight;
+    const availH=Math.max(300,window.innerHeight-(land?120:230));
+    let w=Math.min(wrapW/(W+0.25+maxZ*0.08),availH/((H+0.25)*1.2),88);
+    w=Math.max(30,Math.floor(w));const h=Math.round(w*1.2),d=Math.max(3,Math.round(w*0.09));
+    board.style.width=(W*w+maxZ*d+8)+"px";board.style.height=(H*h+maxZ*d+10)+"px";
+    tiles.forEach(t=>{const s=t.el.style;s.width=w+"px";s.height=h+"px";s.left=(t.x*w+(maxZ-t.z)*d)+"px";s.top=(t.y*h+(maxZ-t.z)*d)+"px";s.zIndex=t.z*100+t.y+1;s.fontSize=Math.round(w*0.6)+"px"});
+  }
+  function refresh(){
+    const o=occ();
+    tiles.forEach(t=>{t.el.hidden=!t.alive;t.el.classList.toggle("blocked",t.alive&&!isFree(t,o));t.el.classList.toggle("sel",t===sel)});
+    const left=tiles.filter(t=>t.alive).length;status(`Tiles left: ${left} of ${tiles.length}`);
+    $("#mjUndo").disabled=!undo.length;
+    if(left&&!findPair()){fb(`No open matches right now, ${N()}. Tap <b>🔀 Shuffle</b> to mix the tiles. You're doing great!`,"soft");$("#mjShuf").classList.add("pulse")}
+    else $("#mjShuf").classList.remove("pulse");
+  }
+  function findPair(){const o=occ(),free=tiles.filter(t=>t.alive&&isFree(t,o)),seen={};
+    for(const t of free){if(seen[t.s])return[seen[t.s],t];seen[t.s]=t}return null}
+  function clearHint(){tiles.forEach(t=>t.el.classList.remove("hint"))}
+  function tap(t){
+    if(finished||!t.alive)return;
+    if(!isFree(t)){sfx.soft();fb("That tile is tucked in. Try a bright one that's open on a side. 😊","soft");return}
+    if(sel===t){sel=null;sfx.pop();refresh();return}
+    if(sel&&sel.s===t.s){
+      sel.alive=false;t.alive=false;undo.push([sel,t]);sel=null;clearHint();sfx.chime();goodFb();
+      refresh();
+      if(tiles.every(x=>!x.alive)){finished=true;later(()=>done({norm:Math.max(40,100-Math.round(45*hints/(tiles.length/2))-shuffles*5-undos),detail:`You cleared all ${tiles.length} tiles!${hints?` (${hints} hint${hints>1?"s":""} used)`:""}`}),900)}
+      return;
+    }
+    if(sel)fb("Those two don't match. Look for another "+t.s,"soft");
+    sel=t;sfx.pop();refresh();
+  }
+  $("#mjHint").onclick=()=>{const p=findPair();clearHint();if(!p){fb("No open matches. Let's tap Shuffle! 🔀","soft");return}
+    hints++;p.forEach(t=>t.el.classList.add("hint"));sfx.sparkle();fb(`Here's a match: look for the glowing ${p[0].s} tiles! ✨`)};
+  $("#mjUndo").onclick=()=>{const u=undo.pop();if(!u)return;u.forEach(t=>t.alive=true);undos++;sel=null;clearHint();fb("Tiles back in place. 👍");refresh()};
+  $("#mjShuf").onclick=()=>{
+    const live=tiles.filter(t=>t.alive);if(live.length<2)return;
+    const pl=mjPlan(live);if(!pl){fb("Hmm, let's try that shuffle once more.","soft");return}
+    const counts={};live.forEach(t=>counts[t.s]=(counts[t.s]||0)+1);
+    const ps=[];Object.keys(counts).forEach(s=>{for(let k=0;k<counts[s]/2;k++)ps.push(s)});
+    const sh=shuffle(ps);pl.forEach((pr,i)=>pr.forEach(t=>{t.s=sh[i];t.el.innerHTML=`<span>${t.s}</span>`;t.el.setAttribute("aria-label","Tile "+t.s)}));
+    shuffles++;sel=null;clearHint();undo=[];sfx.sparkle();fb("All mixed up, and there's always a way to finish! 🔀");refresh();
+  };
+  size();refresh();if(window.innerHeight<560)later(()=>{const bar=$(".mjbar");if(bar)window.scrollTo({top:bar.getBoundingClientRect().top+window.scrollY-70,behavior:"smooth"})},400);fb(`Find two matching open tiles, ${N()}. Take all the time you like. 😊`);
+  const onR=()=>{if(!board.isConnected){window.removeEventListener("resize",onR);return}size()};
+  window.addEventListener("resize",onR);
+};
+
+/* ============ Boot ============ */
+$("#homeBtn").onclick=()=>go(showHome);
+$("#toast").onclick=()=>$("#toast").classList.remove("show");
+$("#soundBtn").onclick=()=>{S.set.muted=!S.set.muted;save();applySettings();sfx.pop();toast(S.set.muted?"Sounds off 🔇":"Sounds on 🔊",1800)};
+$$("#nav button").forEach(b=>b.onclick=()=>{if(!S.name)return;sfx.pop();const n=b.dataset.nav;go(n==="home"?showHome:n==="wellness"?()=>showWellness():n==="progress"?showProgress:showSettings)});
+document.addEventListener("click",e=>{if(e.target.closest(".btn"))sfx.pop()});
+applySettings();
+if(S.name){showHome();setTimeout(()=>toast(`💛 Welcome back, ${N()}! ${aff()}`,6000),700)}else showWelcome();
+if("serviceWorker" in navigator&&/^https?:$/.test(location.protocol)){window.addEventListener("load",()=>{navigator.serviceWorker.register("./sw.js").catch(()=>{})})}
+</script>
+</body>
+</html>
