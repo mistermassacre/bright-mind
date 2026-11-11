@@ -45,6 +45,8 @@ p{margin:.4rem 0}
 .row{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1rem}
 .row.center{justify-content:center}
 .affirm{background:linear-gradient(135deg,#FFE3EC,#FFF0F6);border:2px solid #FFC2D4;border-radius:20px;padding:1rem 1.1rem;font-size:1.15rem;font-weight:600;color:#7A1E48;margin:0 0 1rem}
+.quote{background:#FFFDF2;border:2px solid #FFE8A3;border-radius:20px;padding:1rem 1.1rem;font-size:1.1rem;font-style:italic;color:#5C4400;margin:0 0 1rem}
+.quote small{display:block;font-style:normal;font-weight:700;font-size:.92rem;margin-top:.35rem;color:#8F5B00}
 .tip{background:#EBFBEE;border:2px solid #B2F2BB;border-radius:20px;padding:1rem 1.1rem;color:#1B4D2A;margin:0 0 1rem}
 .note{background:#E7F5FF;border:2px solid #A5D8FF;border-radius:20px;padding:1rem 1.1rem;color:#0B3B66;margin:.6rem 0}
 .gamegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.8rem}
@@ -148,6 +150,29 @@ table.gt td,table.gt th{padding:.5rem .3rem;border-bottom:2px solid #F8EDE3;text
 .mjbar{margin:0 0 .6rem}
 .btn.pulse{animation:pop 1s infinite}
 .btn:disabled{opacity:.45}
+/* feather friends */
+.btools{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin:0 0 .7rem}
+.mjtools{grid-template-columns:1fr 1fr 1fr}
+.btools .btn{min-height:3rem;padding:.45rem .5rem;font-size:1rem}
+.bboard{--bs:44px;display:grid;grid-template-columns:1fr 1fr;gap:.9rem .5rem;padding:.9rem 10px;border-radius:22px;background:linear-gradient(90deg,#8D5B3A 0 8px,transparent 8px calc(100% - 8px),#8D5B3A calc(100% - 8px)),linear-gradient(180deg,#D0EBFF,#E6FCF5);max-width:700px;margin:0 -.85rem}
+@media (min-width:760px){.bboard{margin:0 auto}}
+.branch{position:relative;border:0;background:none;padding:0 0 .2rem;min-height:calc(var(--bs) + 22px);display:flex;flex-direction:column;justify-content:flex-end;border-radius:16px;touch-action:manipulation}
+.branch .perch{display:flex;align-items:flex-end;min-height:var(--bs);padding:0 calc(var(--bs) * 0.13 + 2px)}
+.branch.R .perch{flex-direction:row-reverse}
+.branch .bar{display:block;height:11px;border-radius:8px;background:linear-gradient(180deg,#B07A4F,#7A4B2A);box-shadow:0 2px 0 rgba(0,0,0,.15);position:relative}
+.branch.L .bar{margin-right:10%;border-top-left-radius:0;border-bottom-left-radius:0}
+.branch.R .bar{margin-left:10%;border-top-right-radius:0;border-bottom-right-radius:0}
+.branch.L .bar::after,.branch.R .bar::after{content:"";position:absolute;top:-7px;width:16px;height:10px;background:#51CF66;border-radius:0 100% 0 100%}
+.branch.L .bar::after{right:-8px}.branch.R .bar::after{left:-8px;transform:scaleX(-1)}
+.branch.sel{background:rgba(255,255,255,.55);box-shadow:0 0 0 3px #FAB005}
+.branch.hint{animation:glow 1s ease-in-out infinite;background:rgba(235,251,238,.7)}
+.bird{display:block;flex:none;width:var(--bs);height:var(--bs);margin:0 calc(var(--bs) * -0.13);transition:transform .18s;position:relative}
+.bird svg{width:100%;height:100%;display:block;filter:drop-shadow(0 2px 1px rgba(0,0,0,.18))}
+.bird.up{transform:translateY(-9px)}
+.bird.hop{animation:hop .35s}
+.bird.fly{animation:flyaway 1s ease-in forwards}
+@keyframes hop{0%{transform:translateY(-14px) scale(.9)}60%{transform:translateY(2px)}100%{transform:none}}
+@keyframes flyaway{0%{transform:none;opacity:1}30%{transform:translateY(-12px) rotate(-8deg)}100%{transform:translate(30px,-220px) rotate(12deg) scale(.6);opacity:0}}
 [hidden]{display:none!important}
 @media (max-width:420px){html{font-size:19px} html.big{font-size:22px} .card{padding:1rem}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -169,57 +194,11 @@ table.gt td,table.gt th{padding:.5rem .3rem;border-bottom:2px solid #F8EDE3;text
 <div id="modal" hidden></div>
 <div id="toast" role="status"></div>
 <canvas id="confetti"></canvas>
+<script src="messages.js"></script>
+<script src="trivia.js"></script>
 <script>
 "use strict";
 /* ============ Content ============ */
-const AFFIRMATIONS=[
-"{n}, your family loves you more than words can say. 💛",
-"Brandon and your family are so proud of you, {n}!",
-"Your grandchildren are lucky to have someone as wonderful as you, {n}.",
-"{n}, the people around you light up when you walk into the room.",
-"You are deeply loved, {n}, today and every day.",
-"Your kindness has touched more hearts than you'll ever know, {n}.",
-"{n}, your family treasures every moment with you.",
-"Your friends are so grateful to have you in their lives, {n}.",
-"{n}, your laugh is one of your family's favorite sounds.",
-"The love you've given your family comes back to you a hundredfold, {n}.",
-"{n}, you are the heart of your family.",
-"Brandon made this just for you, {n}, because you mean the world. 💕",
-"Your family is cheering you on with every puzzle, {n}!",
-"{n}, your wisdom and warmth make everyone around you better.",
-"Somebody is thinking about you with love right now, {n}.",
-"{n}, your stories and memories are treasures to the people who love you.",
-"You make your loved ones feel safe and cared for, {n}.",
-"{n}, your grandchildren will always remember your love.",
-"Every hug you give makes someone's day, {n}.",
-"{n}, you are appreciated more than you know.",
-"Your family is so proud of how you keep learning and growing, {n}.",
-"{n}, your friends love your company and your big heart.",
-"You bring sunshine to the people around you, {n}. ☀️",
-"{n}, you are loved for exactly who you are.",
-"Your family's favorite place is anywhere you are, {n}.",
-"{n}, the love you share keeps your whole family close.",
-"You've made a beautiful difference in so many lives, {n}.",
-"{n}, your encouragement has helped your loved ones through so much.",
-"People smile just thinking about you, {n}.",
-"{n}, you are a blessing to your family and friends.",
-"Your gentle heart is admired by everyone who knows you, {n}.",
-"{n}, your family is grateful for every call, visit, and kind word from you.",
-"You are never alone, {n}. You are surrounded by love.",
-"{n}, your curiosity and spirit inspire the people who love you.",
-"Your grandchildren think you're amazing, {n}, and they're right!",
-"{n}, you have a home in so many hearts.",
-"The world is brighter because you're in it, {n}.",
-"{n}, your family loves seeing you happy and healthy.",
-"Your friends count themselves lucky to know you, {n}.",
-"{n}, you're doing something wonderful for yourself today, and your family loves that.",
-"You are cherished, {n}. Never forget it. 💕",
-"{n}, your love is the thread that ties so many happy memories together.",
-"Everyone who loves you is rooting for you today, {n}!",
-"{n}, you deserve all the love that surrounds you.",
-"Your warm heart is one of your family's greatest gifts, {n}.",
-"{n}, the little things you do mean so much to the people who love you."
-];
 const TIPS=[
 "Aim for 7 to 8 hours of sleep. Sleep helps your brain sort and store memories.",
 "Going to bed and waking up at the same time each day helps your body clock and your mood.",
@@ -289,7 +268,8 @@ const GAMES=[
 {id:"math",name:"Number Fun",emoji:"🔢",color:"#D0EBFF",skill:"Mental math",desc:"Friendly number puzzles",help:"Work out each answer in your head and tap your choice. No rush at all!"},
 {id:"pattern",name:"Pattern Puzzles",emoji:"🧩",color:"#FFE8CC",skill:"Reasoning",desc:"What comes next? Odd one out?",help:"Look carefully for the pattern, or spot the one that doesn't belong."},
 {id:"mahjong",name:"Mahjong Tiles",emoji:"🀄",color:"#C3FAE8",skill:"Attention & visual memory",desc:"Match pairs of open tiles",help:"Find two matching tiles that are <b>open</b> and tap them both to clear them. A tile is open when nothing is stacked on top of it and its left or right side is free. Open tiles look bright; tucked-in tiles look a little shaded. Scanning for matches is lovely practice for attention and visual memory. No clock, and Hint, Shuffle, and Undo are always there to help!"},
-{id:"trivia",name:"Memory Lane Trivia",emoji:"📻",color:"#FCC2D7",skill:"Long-term memory",desc:"Music, TV and the good old days",help:"Fun questions about music, TV, and the world. Guessing is part of the fun!",fixed:true}
+{id:"birds",name:"Feather Friends",emoji:"🐦",color:"#D0EBFF",skill:"Planning & problem solving",desc:"Sort the birds by color",help:"Tap a branch to pick up the birds on its end, then tap another branch to fly them there. Birds can land on an empty branch or next to a bird of the <b>same color</b>, if there's room. When a branch is full of one color, that flock flies home! Each color also has its own belly shape (circle, star, heart and more) to help tell them apart. Planning ahead like this is great exercise for problem solving."},
+{id:"trivia",name:"Memory Lane Trivia",emoji:"📻",color:"#FCC2D7",skill:"Long-term memory",desc:"Pop hits, state facts, animals & more",help:"Pick a topic you like, or mix them all! Questions get a little harder as your level goes up, and you won't see the same question again until you've seen them all. Guessing is part of the fun!"}
 ];
 const GMAP={};GAMES.forEach(g=>GMAP[g.id]=g);
 
@@ -299,43 +279,6 @@ const WORDS={
 6:[["GARDEN","Where flowers grow"],["FAMILY","The people who love you"],["CANDLE","Glows on a birthday cake"],["BUTTER","Spread it on toast"],["COOKIE","A sweet baked treat"],["FLOWER","Bees love it"],["KITTEN","A baby cat"],["ORANGE","A fruit and a color"],["PICNIC","Lunch on a blanket outside"],["SUMMER","The warmest season"],["TEAPOT","Pours a warm drink"],["WINDOW","You look through it"],["BASKET","Carry things in it"],["RIBBON","Ties a pretty bow"],["CHERRY","Small red fruit with a pit"],["SUNDAY","A day of rest"]],
 7:[["BLANKET","Keeps you cozy"],["BLOSSOM","A flower on a tree"],["KITCHEN","Where meals are made"],["RAINBOW","Colors after the rain"],["SUNRISE","The start of the day"],["HOLIDAY","A special day off"],["PUMPKIN","Orange and round, great in pie"],["CHICKEN","It lays eggs"],["MORNING","Time for breakfast"],["SWEATER","A warm knitted top"],["TEACHER","Works in a classroom"],["LETTUCE","Leafy salad green"],["PRESENT","A wrapped gift"],["JOURNEY","A long trip"]]
 };
-const TRIVIA=[
-["Which band sang \"Hey Jude\"?",["The Beatles","The Monkees","The Beach Boys","The Rolling Stones"]],
-["Who was the first person to walk on the Moon in 1969?",["Neil Armstrong","John Glenn","Buzz Aldrin","Alan Shepard"]],
-["Chubby Checker made which dance famous in 1960?",["The Twist","The Jitterbug","The Hustle","The Mashed Potato"]],
-["Elvis Presley is known as the King of...?",["Rock and Roll","Country","Jazz","Soul"]],
-["Who sang the 1967 hit \"Respect\"?",["Aretha Franklin","Diana Ross","Tina Turner","Dionne Warwick"]],
-["Which TV show starred Lucy and Ricky Ricardo?",["I Love Lucy","The Honeymooners","Bewitched","Leave It to Beaver"]],
-["In the movie \"The Wizard of Oz\", what color are Dorothy's slippers?",["Ruby red","Silver","Emerald green","Gold"]],
-["Which singer was nicknamed \"Ol' Blue Eyes\"?",["Frank Sinatra","Dean Martin","Bing Crosby","Perry Como"]],
-["Which children's TV show features Big Bird?",["Sesame Street","Captain Kangaroo","The Electric Company","Romper Room"]],
-["Who played Maria in the 1965 film \"The Sound of Music\"?",["Julie Andrews","Audrey Hepburn","Doris Day","Natalie Wood"]],
-["Which fashion doll first appeared in 1959?",["Barbie","Raggedy Ann","Cabbage Patch Kid","Chatty Cathy"]],
-["Which cartoon family lived in the town of Bedrock?",["The Flintstones","The Jetsons","The Simpsons","The Addams Family"]],
-["Which planet is known as the Red Planet?",["Mars","Venus","Jupiter","Saturn"]],
-["How many days are in a leap year?",["366","365","364","367"]],
-["What is the largest ocean on Earth?",["Pacific","Atlantic","Indian","Arctic"]],
-["Which country gave the Statue of Liberty to the United States?",["France","England","Italy","Spain"]],
-["Who painted the Mona Lisa?",["Leonardo da Vinci","Michelangelo","Pablo Picasso","Vincent van Gogh"]],
-["What is the capital city of Canada?",["Ottawa","Toronto","Vancouver","Montreal"]],
-["In what year did the Woodstock music festival take place?",["1969","1965","1972","1975"]],
-["Which group sang \"My Girl\" in 1964?",["The Temptations","The Four Tops","The Drifters","The Platters"]],
-["Which TV family said \"Good night, John-Boy\"?",["The Waltons","The Bradys","The Partridges","The Ingalls"]],
-["Which TV western followed the Cartwright family on the Ponderosa ranch?",["Bonanza","Gunsmoke","The Rifleman","Rawhide"]],
-["Which famous ocean liner sank in 1912?",["Titanic","Lusitania","Queen Mary","Britannic"]],
-["How many strings does a standard guitar have?",["6","4","5","8"]],
-["Which flower is famously linked with the Netherlands?",["Tulip","Rose","Daisy","Sunflower"]],
-["What does a caterpillar turn into?",["A butterfly","A beetle","A dragonfly","A bee"]],
-["Which president started the Peace Corps in 1961?",["John F. Kennedy","Dwight Eisenhower","Lyndon Johnson","Richard Nixon"]],
-["Who wrote and first recorded \"I Will Always Love You\"?",["Dolly Parton","Whitney Houston","Loretta Lynn","Patsy Cline"]],
-["Which group sang \"Stop! In the Name of Love\"?",["The Supremes","The Ronettes","The Shirelles","The Marvelettes"]],
-["Which candy \"melts in your mouth, not in your hand\"?",["M&M's","Hershey's Kisses","Milk Duds","Junior Mints"]],
-["How many players does a baseball team have on the field?",["9","11","10","7"]],
-["Which hit 1964 musical film starred Rex Harrison and Audrey Hepburn?",["My Fair Lady","West Side Story","Mary Poppins","Oliver!"]],
-["What is the tallest animal in the world?",["Giraffe","Elephant","Camel","Moose"]],
-["Which ingredient makes bread rise?",["Yeast","Salt","Sugar","Baking soda"]],
-["Who sang \"Sweet Caroline\" in 1969?",["Neil Diamond","Elton John","Johnny Cash","Paul Anka"]]
-];
 
 const CATS=[
 {n:"fruits",e:["🍎","🍌","🍇","🍓","🍊","🍐","🍒","🍋","🍉","🍍"]},
@@ -367,6 +310,9 @@ const BADGES=[
 {id:"workout",e:"💪",n:"Daily Brain Games",d:"Finish all 3 of today's Brain Games"},
 {id:"mahjong",e:"🀄",n:"Tile Matcher",d:"Finish a game of Mahjong Tiles"},
 {id:"mahjong3",e:"🐉",n:"Mahjong Marvel",d:"Finish Mahjong Tiles at level 3 or higher"},
+{id:"trivia4",e:"🧠",n:"Trivia Explorer",d:"Try every trivia topic"},
+{id:"birds",e:"🐦",n:"Feather Friend",d:"Finish a Feather Friends puzzle"},
+{id:"birds3",e:"🦜",n:"Flock Leader",d:"Finish Feather Friends at level 3 or higher"},
 {id:"lvl5",e:"🎓",n:"Top Level",d:"Reach level 5 in any game"},
 {id:"water",e:"💧",n:"Well Watered",d:"Log 8 glasses of water in a day"},
 {id:"calm",e:"🧘",n:"Calm & Centered",d:"Finish a breathing exercise"},
@@ -375,7 +321,7 @@ const BADGES=[
 
 /* ============ State ============ */
 const KEY="brightMind.v1";
-const DEF={name:"",set:{muted:false,vol:0.7,big:false,water:true},hist:[],days:[],games:{},water:{},badges:{},grat:{},workout:{},hintSeen:false,bestStreak:0,created:0};
+const DEF={name:"",set:{muted:false,vol:0.7,big:false,water:true},hist:[],days:[],games:{},water:{},badges:{},grat:{},workout:{},hintSeen:false,bestStreak:0,created:0,rot:{},tseen:{},tcat:"mixed",tplayed:{}};
 function clone(o){return JSON.parse(JSON.stringify(o))}
 function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&typeof s==="object"){const m=Object.assign(clone(DEF),s);m.set=Object.assign({},DEF.set,s.set||{});return m}}catch(e){}const d=clone(DEF);d.created=Date.now();return d}
 let S=load();
@@ -390,8 +336,21 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function N(){return esc(S.name||"friend")}
 function fill(t){return t.replace(/\{n\}/g,N())}
-function aff(){return fill(rnd(AFFIRMATIONS))}
-function tip(){return rnd(TIPS)}
+/* Shuffled no-repeat rotation, remembered between visits */
+function rotNext(key,len){
+  if(!S.rot||typeof S.rot!=="object")S.rot={};
+  let r=S.rot[key];
+  if(!r||r.n!==len||!Array.isArray(r.q)||!r.q.length){
+    const last=r?r.last:null;const q=shuffle(Array.from({length:len},(_,i)=>i));
+    if(q.length>1&&q[0]===last)q.push(q.shift());
+    r=S.rot[key]={n:len,q:q,last:null};
+  }
+  const i=r.q.shift();r.last=i;save();return i;
+}
+function aff(){return fill(AFFIRMATIONS[rotNext("aff",AFFIRMATIONS.length)])}
+function tip(){return TIPS[rotNext("tip",TIPS.length)]}
+function quoteHTML(){const q=QUOTES[rotNext("quote",QUOTES.length)];return `<div class="quote">“${esc(q[0])}”<small>— ${esc(q[1])}</small></div>`}
+function dailyTip(){const d=today();if(!S.rot.tipDay||S.rot.tipDay.d!==d){S.rot.tipDay={d:d,t:TIPS[rotNext("tip",TIPS.length)]}}return S.rot.tipDay.t}
 function praise(){return fill(rnd(PRAISE))}
 function gentle(){return fill(rnd(GENTLE))}
 function seeded(str){let h=1779033703^str.length;for(let i=0;i<str.length;i++){h=Math.imul(h^str.charCodeAt(i),3432918353);h=h<<13|h>>>19}return function(){h=Math.imul(h^(h>>>16),2246822507);h=Math.imul(h^(h>>>13),3266489909);return((h^=h>>>16)>>>0)/4294967296}}
@@ -426,6 +385,9 @@ const sfx=(function(){
     soft(){tone(440,0,0.25,"sine",0.1);tone(392,0.14,0.35,"sine",0.09)},
     note(f,d){tone(f,0,d||0.4,"triangle",0.26)},
     bubble(){tone(380,0,0.14,"sine",0.22,900);tone(620,0.11,0.14,"sine",0.16,1300)},
+    chirp(n){for(let i=0;i<(n||1);i++){tone(2300+i*250,i*0.11,0.07,"sine",0.11,3300+i*200);tone(2900+i*250,i*0.11+0.06,0.06,"sine",0.08,2400)}},
+    chirpSong(){[0,0.12,0.24,0.42,0.54].forEach((t,i)=>tone(2200+(i%3)*400,t,0.08,"sine",0.12,3400+(i%2)*300));[1568,2093,2637].forEach((f,i)=>tone(f,0.7+i*0.07,0.3,"triangle",0.1))},
+    flap(){tone(260,0,0.07,"triangle",0.07,520);tone(300,0.08,0.07,"triangle",0.06,560)},
     breathe(up){tone(up?261.63:329.63,0,1.6,"sine",0.07,up?329.63:261.63)}
   };
 })();
@@ -488,6 +450,9 @@ function checkBadges(ctx){
   if(dailyIds().every(id=>doneToday().includes(id)))award("workout",L);
   if(gstat("mahjong").plays>0)award("mahjong",L);
   if(S.hist.some(h=>h.g==="mahjong"&&h.l>=3))award("mahjong3",L);
+  if(gstat("birds").plays>0)award("birds",L);
+  if(S.hist.some(h=>h.g==="birds"&&h.l>=3))award("birds3",L);
+  if(S.tplayed&&TRIVIA_CATS.every(c=>S.tplayed[c.id]))award("trivia4",L);
   if(GAMES.some(g=>gstat(g.id).level>=5))award("lvl5",L);
   if(waterToday()>=8)award("water",L);
   return L;
@@ -570,6 +535,7 @@ function showHome(){
     <p>${st>1?`🔥 You're on a <b>${st}-day</b> streak. Amazing!`:dn.length?`You've played <b>${dn.length}</b> game${dn.length===1?"":"s"} today. Wonderful!`:"Ready for some happy brain games today?"}</p>
   </section>
   <div class="affirm" id="homeAff">💛 ${aff()}</div>
+  ${quoteHTML()}
   <section class="card">
     <h2>🌞 Today's Brain Games</h2>
     <p class="muted">${wdone===3?`All done for today, ${N()}! You're a star! ⭐`:`Three games picked just for today (${wdone} of 3 done).`}</p>
@@ -583,7 +549,7 @@ function showHome(){
     <h2>💧 Water Today</h2>
     <div class="waterbox">${waterHTML()}</div>
   </section>
-  <div class="tip">💡 <b>Tip for today:</b> ${TIPS[seeded("tip"+today())()*TIPS.length|0]}</div>
+  <div class="tip">💡 <b>Tip for today:</b> ${dailyTip()}</div>
   <div class="row center"><button class="btn alt" id="breathBtn">🧘 1-minute breathing</button><button class="btn blue" id="moreAff">💕 Another kind word</button></div>
   `);
   $$("[data-game]").forEach(b=>b.onclick=()=>go(()=>startGame(b.dataset.game)));
@@ -727,7 +693,7 @@ function waterPrompt(){
   $("#wNo").onclick=closeModal;
 }
 /* Occasional loving note */
-setInterval(()=>{if(document.hidden||!S.name||!$("#modal").hidden)return;if(Math.random()<0.5)toast("💛 "+aff(),6000)},4*60000);
+setInterval(()=>{if(document.hidden||!S.name||!$("#modal").hidden)return;if(Math.random()<0.4)toast("💛 "+aff(),6000)},6*60000);
 
 /* ============ Game framework ============ */
 function startGame(id){
@@ -746,7 +712,7 @@ function startGame(id){
   GAMEFN[id](level,res=>{if(t!==token)return;finishGame(id,level,res)});
 }
 let correctCount=0;
-function goodFb(extra){correctCount++;fb((correctCount%5===0?"💛 "+aff():praise())+(extra?" "+extra:""),"good")}
+function goodFb(extra){correctCount++;fb((correctCount%8===0?"💛 "+aff():praise())+(extra?" "+extra:""),"good")}
 
 function finishGame(id,level,res){
   const g=GMAP[id],gs=gstat(id);
@@ -784,6 +750,7 @@ function showResults(g,res,pts,pb,lvlMsg,lvlUp,newB){
   </section>
   ${newB.length?`<section class="card center"><h2>🏅 New badge${newB.length>1?"s":""}!</h2><div class="badges">${badgeHTML(newB)}</div></section>`:""}
   <div class="affirm">💛 ${aff()}</div>
+  ${quoteHTML()}
   <div class="tip">💡 <b>Brain tip:</b> ${tip()}</div>
   ${gamesToday%3===0?`<div class="note">💧 You've played ${gamesToday} games today. A great moment for a sip of water! <button class="btn blue" id="resWater" style="margin-top:.5rem">I had a glass 💧</button></div>`:""}
   <div class="row center">
@@ -959,24 +926,136 @@ function patternQ(level){
 }
 GAMEFN.pattern=function(level,done){const qs=[];for(let i=0;i<8;i++)qs.push(patternQ(level));runQuiz(qs,done)};
 
+/* Trivia: category picker, level-based difficulty, no repeats until a topic's questions are all used */
+function qid(s){let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return (h>>>0).toString(36)}
+const TV_WANT={1:[1],2:[1,2],3:[2],4:[2,3],5:[3]};
+function triviaPick(cat,level,n){
+  if(!S.tseen||typeof S.tseen!=="object")S.tseen={};
+  const want=TV_WANT[level]||[1];
+  const dist=d=>Math.min(...want.map(w=>Math.abs(w-d)));
+  const cats=cat==="mixed"?TRIVIA_CATS.map(c=>c.id):[cat];
+  const lists={};
+  cats.forEach(c=>{
+    let seen=new Set(S.tseen[c]||[]);
+    const all=TRIVIA_Q[c].map(q=>({c:c,id:qid(q[0]),q:q}));
+    let un=all.filter(x=>!seen.has(x.id));
+    const need=cat==="mixed"?Math.ceil(n/cats.length)+1:n;
+    if(un.length<need){S.tseen[c]=[];un=all}
+    // closest difficulty first, random within the same difficulty
+    lists[c]=shuffle(un).sort((a,b)=>dist(a.q[2])-dist(b.q[2]));
+  });
+  const out=[];let k=0;const order=shuffle(cats);
+  while(out.length<n&&k<500){const c=order[k%order.length];const x=lists[c].shift();if(x)out.push(x);k++}
+  out.forEach(x=>{(S.tseen[x.c]=S.tseen[x.c]||[]).push(x.id)});
+  save();
+  return shuffle(out);
+}
+function triviaLeft(c){const seen=new Set(S.tseen&&S.tseen[c]||[]);return TRIVIA_Q[c].filter(q=>!seen.has(qid(q[0]))).length}
 GAMEFN.trivia=function(level,done){
-  const qs=shuffle(TRIVIA).slice(0,6).map(t=>{const opts=shuffle(t[1]);return{q:t[0],opts:opts.map(esc),a:opts.indexOf(t[1][0])}});
-  runQuiz(qs,done);
+  const area=$("#area");
+  const btn=(id,e,nm,ds,left)=>`<button class="gcard tcat ${S.tcat===id?"done":""}" data-cat="${id}"><span class="ge" style="background:#FFF0F6">${e}</span><span><b>${nm}</b><small>${ds}</small>${left!==null?`<small>${left} fresh questions waiting</small>`:""}</span></button>`;
+  status(`Level ${level}: ${["","Warm-up questions","Easy to medium questions","Medium questions","Medium to tricky questions","Tricky questions for a sharp mind"][level]||""}`);
+  fb(`Which topic sounds fun today, ${N()}? 😊`);
+  area.innerHTML=`<h3 class="center">Choose a topic</h3><div class="gamegrid" id="tcats">${btn("mixed","🎲","Mix of Everything","A little bit of every topic",null)}${TRIVIA_CATS.map(c=>btn(c.id,c.emoji,c.name,c.desc,triviaLeft(c.id))).join("")}</div>`;
+  $$("[data-cat]").forEach(b=>b.onclick=()=>{
+    const c=b.dataset.cat;S.tcat=c;if(!S.tplayed||typeof S.tplayed!=="object")S.tplayed={};S.tplayed[c]=1;save();sfx.chime();
+    const n=level>=3?8:6;
+    const qs=triviaPick(c,level,n).map(x=>{const t=x.q,opts=shuffle(t[1]);return{q:esc(t[0]),opts:opts.map(esc),a:opts.indexOf(t[1][0])}});
+    const nm=c==="mixed"?"Mix of Everything":TRIVIA_CATS.find(x=>x.id===c).name;
+    $(".ghead h2").innerHTML=`📻 Trivia: ${nm}`;
+    runQuiz(qs,done);
+  });
 };
 
-
 /* ===== Mahjong Tiles (solitaire) ===== */
-const MJ_SYMBOLS=["🌸","🌻","🍓","🐱","🐶","🦋","🍎","🌈","⭐","🎈","🐦","🍋","🌷","🐞","🍒","☕","🎁","🐝","🐢","🍄"];
-const MJ_LAYOUTS=[
- [["####","####","####"],["....",".##.","...."]],
- [["####","####","####","####"],["....",".##.",".##.","...."]],
- [["######","######","######","######"],["......",".####.",".####.","......"],["......","..##..","..##..","......"]],
- [[".######.","########","########",".######."],["........",".######.",".######.","........"],["........","...##...","...##...","........"]],
- [[".######.","########","########","########",".######."],["........",".######.",".######.",".######.","........"],["........","........","..####..","........","........"],["........","........","...##...","........","........"]]
+const MJ_SYMBOLS=["🌸","🌻","🍓","🐱","🐶","🦋","🍎","🌈","⭐","🎈","🐦","🍋","🌷","🐞","🍒","☕","🎁","🐝","🐢","🍄","🐸","🦉","🐠","🍉","🌵","🍩","🎀","🐰","🦊","🐼","🍇","🥕","🌙","🐧","🌽","🧁"];
+/* Base shapes ('#' = tile). Upper layers are built on top automatically, so every shape gives several boards. */
+const MJ_SHAPES={
+ s:[
+  ["#####","#####","#####","#####"],
+  [".####.","######","######",".####."],
+  ["..##..",".####.","######",".####.","..##.."],
+  ["##..##","######","######","##..##"],
+  ["######","######","######"],
+  ["##.##","#####","#####","#####","##.##"],
+  [".###.","#####","#####","#####",".###."]
+ ],
+ m:[
+  [".##.##.","#######","#######",".#####.","..###.."],
+  ["##...##","###.###","#######","###.###","##...##"],
+  ["#######","#######","#######","#######"],
+  ["..###..",".#####.","#######","#######",".#####."],
+  ["###.###","#######","#######","###.###"],
+  [".######.","########","########",".######."],
+  ["#.#.#.#","#######","#######","#######"]
+ ],
+ l:[
+  [".#######.","#########","#########","#########",".#######."],
+  ["###...###","####.####","#########","####.####","###...###"],
+  ["..##.##..",".#######.","#########","#########",".#######.","..##.##.."],
+  ["#.#.#.#.#","#########","#########","#########","#########"],
+  ["...###...","..#####..","#########","#########","..#####..","...###..."],
+  ["....#....","...###...",".#######.","#########","#########",".#######."],
+  [".####...#","######.##","#########","######.##",".####...#"],
+  ["..###.##.",".########","#########","#########",".#######."],
+  ["########","########","########","########","########"],
+  ["#########","#########","###...###","###...###","#########"]
+ ]
+};
+/* Per level: which shapes, how many layers at most, tile count range, random board size */
+const MJ_LEVELS=[
+ {sh:["s"],z:2,zmin:1,min:16,max:26,rw:[5,6],rh:[4,4]},
+ {sh:["s","m"],z:3,zmin:2,min:24,max:36,rw:[6,7],rh:[4,5]},
+ {sh:["m","l"],z:3,zmin:2,min:38,max:56,rw:[7,8],rh:[5,5]},
+ {sh:["l","m"],z:4,zmin:3,min:50,max:68,rw:[8,9],rh:[5,6]},
+ {sh:["l"],z:5,zmin:3,min:62,max:88,rw:[9,9],rh:[5,6]}
 ];
+function mjGrid(rows){const g=[];rows.forEach((r,y)=>r.split("").forEach((c,x)=>{if(c==="#")g.push(x+","+y)}));return new Set(g)}
+/* Stack layers: a spot gets a tile above if the tile below has neighbours on both sides and above or below it */
+function mjStack(base,maxZ,keep,strict){
+  const layers=[base];
+  for(let z=1;z<maxZ;z++){
+    const prev=layers[z-1],next=new Set();
+    prev.forEach(k=>{const[x,y]=k.split(",").map(Number);
+      const up=prev.has(x+","+(y-1)),dn=prev.has(x+","+(y+1));
+      if(prev.has((x-1)+","+y)&&prev.has((x+1)+","+y)&&(strict?(up&&dn):(up||dn)))next.add(k)});
+    const out=keep?keep(next,z):next;
+    if(!out.size)break;layers.push(out);
+  }
+  const pos=[];layers.forEach((L,z)=>L.forEach(k=>{const[x,y]=k.split(",").map(Number);pos.push({x,y,z})}));
+  return pos;
+}
+function mjEven(pos){
+  if(pos.length%2===0)return pos;
+  const top=Math.max(...pos.map(p=>p.z)),cand=pos.filter(p=>p.z===top);
+  const W=Math.max(...pos.map(p=>p.x)),H=Math.max(...pos.map(p=>p.y));
+  cand.sort((a,b)=>(Math.abs(a.x-W/2)+Math.abs(a.y-H/2))-(Math.abs(b.x-W/2)+Math.abs(b.y-H/2)));
+  return pos.filter(p=>p!==cand[0]);
+}
+/* A brand-new random layered board, mirrored left-to-right so it looks tidy */
+function mjRandomLayout(cfg){
+  for(let t=0;t<200;t++){
+    const W=ri(cfg.rw[0],cfg.rw[1]),H=ri(cfg.rh[0],cfg.rh[1]),base=new Set();
+    for(let y=0;y<H;y++)for(let x=0;x<Math.ceil(W/2);x++){
+      const edge=(x===0)+(y===0||y===H-1);
+      if(Math.random()<(edge===2?0.45:edge===1?0.78:0.94)){base.add(x+","+y);base.add((W-1-x)+","+y)}
+    }
+    const pos=mjEven(mjStack(base,cfg.z,(next)=>{const o=new Set();next.forEach(k=>{const[x,y]=k.split(",").map(Number);const m=(W-1-x)+","+y;if(x<=W-1-x&&Math.random()<0.85){o.add(k);if(next.has(m))o.add(m)}});return o}));
+    if(pos.length>=cfg.min&&pos.length<=cfg.max&&Math.max(...pos.map(p=>p.z))+1>=cfg.zmin)return pos;
+  }
+  return null;
+}
+function mjShapeLayout(cfg){
+  const opts=[];cfg.sh.forEach(s=>MJ_SHAPES[s].forEach(r=>opts.push(r)));
+  for(const rows of shuffle(opts)){
+    let r=rows.slice();if(Math.random()<0.5)r=r.slice().reverse();
+    for(let z=cfg.z;z>=cfg.zmin;z--)for(const st of [false,true]){const pos=mjEven(mjStack(mjGrid(r),z,null,st));if(pos.length>=cfg.min&&pos.length<=cfg.max&&Math.max(...pos.map(p=>p.z))+1>=Math.min(z,cfg.zmin+1))return pos}
+  }
+  return null;
+}
 function mjPositions(level){
-  const L=MJ_LAYOUTS[level-1],pos=[];
-  L.forEach((rows,z)=>rows.forEach((r,y)=>r.split("").forEach((c,x)=>{if(c==="#")pos.push({x,y,z})})));
+  const cfg=MJ_LEVELS[clamp(level,1,5)-1];
+  let pos=(Math.random()<0.5?mjRandomLayout(cfg):null)||mjShapeLayout(cfg)||mjRandomLayout(cfg);
   const W=Math.max(...pos.map(p=>p.x))+1,H=Math.max(...pos.map(p=>p.y))+1;
   // Portrait screens: turn the layout sideways so tiles can be bigger
   if(window.innerHeight>window.innerWidth*1.1&&W>H)return pos.map(p=>({x:p.y,y:p.x,z:p.z}));
@@ -1003,13 +1082,13 @@ function mjPlan(pos){
 GAMEFN.mahjong=function(level,done){
   const area=$("#area");
   let tiles=[],sel=null,undo=[],hints=0,shuffles=0,undos=0,finished=false;
-  const pos=mjPositions(level),plan=mjPlan(pos);
-  const nPairs=pos.length/2,nSym=Math.min(MJ_SYMBOLS.length,level<=2?nPairs:Math.ceil(nPairs*0.7));
+  let pos,plan=null;for(let t=0;t<20&&!plan;t++){pos=mjPositions(level);plan=mjPlan(pos)}
+  const nPairs=pos.length/2,nSym=Math.min(MJ_SYMBOLS.length,level===1?nPairs:level===2?Math.ceil(nPairs*0.85):Math.ceil(nPairs*0.72));
   const syms=shuffle(MJ_SYMBOLS).slice(0,nSym);
   const pairSyms=shuffle(Array.from({length:nPairs},(_,i)=>syms[i%nSym]));
   plan.forEach((pr,i)=>pr.forEach(p=>tiles.push({x:p.x,y:p.y,z:p.z,s:pairSyms[i],alive:true})));
   const W=Math.max(...tiles.map(t=>t.x))+1,H=Math.max(...tiles.map(t=>t.y))+1,maxZ=Math.max(...tiles.map(t=>t.z));
-  area.innerHTML=`<div class="row center mjbar"><button class="btn alt" id="mjHint">💡 Hint</button><button class="btn blue" id="mjShuf">🔀 Shuffle</button><button class="btn ghost" id="mjUndo">↩️ Undo</button></div><div class="mjwrap"><div class="mjboard" id="mjBoard"></div></div>`;
+  area.innerHTML=`<div class="btools mjtools mjbar"><button class="btn alt" id="mjHint">💡 Hint</button><button class="btn blue" id="mjShuf">🔀 Shuffle</button><button class="btn ghost" id="mjUndo">↩️ Undo</button></div><div class="mjwrap"><div class="mjboard" id="mjBoard"></div></div>`;
   const board=$("#mjBoard");
   tiles.forEach((t,i)=>{const b=document.createElement("button");b.className="mjt";b.dataset.i=i;b.innerHTML=`<span>${t.s}</span>`;b.setAttribute("aria-label","Tile "+t.s);b.onclick=()=>tap(t);t.el=b;board.appendChild(b)});
   function occ(){return new Set(tiles.filter(t=>t.alive).map(t=>mjKey(t.x,t.y,t.z)))}
@@ -1017,7 +1096,7 @@ GAMEFN.mahjong=function(level,done){
   function size(){
     const wrapW=Math.min(area.clientWidth||320,860);
     const land=window.innerWidth>window.innerHeight;
-    const availH=Math.max(300,window.innerHeight-(land?120:230));
+    const availH=Math.max(300,window.innerHeight-(land?120:250));
     let w=Math.min(wrapW/(W+0.25+maxZ*0.08),availH/((H+0.25)*1.2),88);
     w=Math.max(30,Math.floor(w));const h=Math.round(w*1.2),d=Math.max(3,Math.round(w*0.09));
     board.style.width=(W*w+maxZ*d+8)+"px";board.style.height=(H*h+maxZ*d+10)+"px";
@@ -1058,9 +1137,162 @@ GAMEFN.mahjong=function(level,done){
     const sh=shuffle(ps);pl.forEach((pr,i)=>pr.forEach(t=>{t.s=sh[i];t.el.innerHTML=`<span>${t.s}</span>`;t.el.setAttribute("aria-label","Tile "+t.s)}));
     shuffles++;sel=null;clearHint();undo=[];sfx.sparkle();fb("All mixed up, and there's always a way to finish! 🔀");refresh();
   };
-  size();refresh();if(window.innerHeight<560)later(()=>{const bar=$(".mjbar");if(bar)window.scrollTo({top:bar.getBoundingClientRect().top+window.scrollY-70,behavior:"smooth"})},400);fb(`Find two matching open tiles, ${N()}. Take all the time you like. 😊`);
+  size();refresh();if(window.innerHeight<900)later(()=>{const bar=$(".mjbar");if(bar)window.scrollTo({top:bar.getBoundingClientRect().top+window.scrollY-70,behavior:"smooth"})},400);fb(`Find two matching open tiles, ${N()}. Take all the time you like. 😊`);
   const onR=()=>{if(!board.isConnected){window.removeEventListener("resize",onR);return}size()};
   window.addEventListener("resize",onR);
+};
+
+/* ===== Feather Friends: an original color-sorting puzzle with round, cheerful birds ===== */
+/* Colorblind-friendly palette (Okabe-Ito), and every color also wears its own belly shape. */
+const BIRD_COLORS=[
+ {c:"#E69F00",n:"orange",m:"circle",k:"#2D2340"},
+ {c:"#56B4E9",n:"sky blue",m:"star",k:"#2D2340"},
+ {c:"#009E73",n:"green",m:"heart",k:"#FFFFFF"},
+ {c:"#F0E442",n:"yellow",m:"triangle",k:"#2D2340"},
+ {c:"#0072B2",n:"blue",m:"square",k:"#FFFFFF"},
+ {c:"#D55E00",n:"red-orange",m:"diamond",k:"#FFFFFF"},
+ {c:"#CC79A7",n:"pink",m:"plus",k:"#2D2340"}
+];
+const BIRD_LEVELS=[{k:3,cap:4},{k:4,cap:4},{k:5,cap:4},{k:6,cap:4},{k:7,cap:4}];
+const BIRD_MARK={
+ circle:'<circle r="4.6"/>',
+ star:'<polygon points="0,-6 1.8,-2 6,-1.9 2.8,1 3.7,5.3 0,3.1 -3.7,5.3 -2.8,1 -6,-1.9 -1.8,-2"/>',
+ heart:'<path d="M0,5.2 C-7,0.6 -5.6,-5.4 -2.6,-5.4 C-1.2,-5.4 -0.4,-4.6 0,-3.6 C0.4,-4.6 1.2,-5.4 2.6,-5.4 C5.6,-5.4 7,0.6 0,5.2Z"/>',
+ triangle:'<polygon points="0,-5.6 5.6,4.4 -5.6,4.4"/>',
+ square:'<rect x="-4.3" y="-4.3" width="8.6" height="8.6" rx="1"/>',
+ diamond:'<polygon points="0,-6.2 5,0 0,6.2 -5,0"/>',
+ plus:'<path d="M-1.9,-5.6h3.8v3.7h3.7v3.8h-3.7v3.7h-3.8v-3.7h-3.7v-3.8h3.7z"/>'
+};
+function birdSVG(ci,flip){
+  const b=BIRD_COLORS[ci];
+  return `<svg viewBox="-25 -25 50 50" aria-hidden="true"><g transform="scale(${flip?-1:1},1)">
+  <polygon points="-14,2 -24,-5 -22,8" fill="${b.c}" stroke="rgba(0,0,0,.3)" stroke-width="1.2"/>
+  <path d="M-2,-15 q1,-8 6,-5 M2,-15 q4,-6 8,-2" stroke="${b.c}" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  <circle r="16" fill="${b.c}" stroke="rgba(0,0,0,.28)" stroke-width="1.5"/>
+  <ellipse cx="3" cy="6" rx="10.5" ry="8.5" fill="#fff" opacity=".5"/>
+  <ellipse cx="-6" cy="1" rx="8" ry="5.2" fill="rgba(0,0,0,.16)" transform="rotate(-18 -6 1)"/>
+  <circle cx="7" cy="-5" r="3.4" fill="#2D2340"/><circle cx="8.2" cy="-6.2" r="1.15" fill="#fff"/>
+  <circle cx="10.5" cy="1.5" r="2.5" fill="#FF8FA3" opacity=".6"/>
+  <polygon points="14.5,-3.2 22,-0.6 14.5,2.2" fill="#FFA94D" stroke="#B35C00" stroke-width="1"/>
+  <path d="M-3,15.5v4 M3,15.5v4" stroke="#B35C00" stroke-width="2" stroke-linecap="round"/>
+  <g transform="translate(3 6)" fill="${b.k}" opacity=".85">${BIRD_MARK[b.m]}</g></g></svg>`;
+}
+/* Rules shared by the game, the hint helper, and the solver */
+function bTopRun(br){if(!br.length)return 0;const c=br[br.length-1];let k=0;for(let i=br.length-1;i>=0&&br[i]===c;i--)k++;return k}
+function bCanMove(bs,a,b,cap){const A=bs[a],B=bs[b];if(a===b||!A.length||B.length>=cap)return false;return !B.length||B[B.length-1]===A[A.length-1]}
+function bApply(bs,a,b,cap){const A=bs[a],B=bs[b];const n=Math.min(bTopRun(A),cap-B.length);for(let i=0;i<n;i++)B.push(A.pop());return n}
+function bDone(br,cap){return br.length===cap&&br.every(c=>c===br[0])}
+function bKey(bs){return bs.map(b=>b.join("")).sort().join("|")}
+/* Depth-first solver with memory: finds a sequence of moves that flies every flock home */
+function birdSolve(start,cap,limit){
+  const seen=new Set();let nodes=0;
+  const clear=bs=>{bs.forEach((b,i)=>{if(bDone(b,cap))bs[i]=[]})};
+  function moves(bs){
+    const out=[];let firstEmpty=-1;
+    bs.forEach((b,i)=>{if(!b.length&&firstEmpty<0)firstEmpty=i});
+    for(let a=0;a<bs.length;a++){const A=bs[a];if(!A.length)continue;const run=bTopRun(A);
+      for(let b=0;b<bs.length;b++){
+        if(!bCanMove(bs,a,b,cap))continue;
+        const B=bs[b];
+        if(!B.length){if(b!==firstEmpty||run===A.length)continue}
+        const fits=Math.min(run,cap-B.length);
+        out.push({a,b,s:(B.length?10:0)+(B.length+fits===cap?20:0)+(run===A.length&&B.length?5:0)});
+      }}
+    return out.sort((x,y)=>y.s-x.s);
+  }
+  const path=[];
+  function dfs(bs){
+    if(bs.every(b=>!b.length))return true;
+    if(++nodes>limit)return false;
+    const k=bKey(bs);if(seen.has(k))return false;seen.add(k);
+    for(const m of moves(bs)){
+      const nb=bs.map(b=>b.slice());bApply(nb,m.a,m.b,cap);clear(nb);
+      path.push([m.a,m.b]);if(dfs(nb))return true;path.pop();
+      if(nodes>limit)return false;
+    }
+    return false;
+  }
+  const s=start.map(b=>b.slice());clear(s);
+  return dfs(s)?path.slice():null;
+}
+function birdDeal(level){
+  const L=BIRD_LEVELS[clamp(level,1,5)-1];
+  for(let t=0;t<300;t++){
+    const birds=shuffle([].concat(...Array.from({length:L.k},(_,c)=>Array(L.cap).fill(c))));
+    const bs=[];for(let i=0;i<L.k;i++)bs.push(birds.slice(i*L.cap,(i+1)*L.cap));
+    bs.push([],[]);
+    if(bs.some(b=>b.length&&b.every(c=>c===b[0])))continue;
+    const sol=birdSolve(bs,L.cap,40000);
+    if(sol)return{bs:shuffle(bs),cap:L.cap,k:L.k,par:sol.length};
+  }
+  return null;
+}
+GAMEFN.birds=function(level,done){
+  const area=$("#area");
+  const deal=birdDeal(level);
+  const cap=deal.cap,K=deal.k,start=deal.bs.map(b=>b.slice());
+  let plan=null,bs=start.map(b=>b.slice()),sel=-1,hist=[],moves=0,hints=0,undos=0,restarts=0,extra=0,home=0,busy=false,finished=false;
+  area.innerHTML=`<div class="btools mjbar"><button class="btn alt" id="bHint">💡 Hint</button><button class="btn ghost" id="bUndo">↩️ Undo</button><button class="btn ghost" id="bRestart">🔄 Restart</button><button class="btn green" id="bExtra">🌿 Add branch</button></div><div class="bboard" id="bBoard"></div>`;
+  const board=$("#bBoard");
+  function birdSize(){const w=Math.min(board.clientWidth||320,700);const col=(w-30)/2;return Math.max(30,Math.min(64,Math.floor((col-12)/(cap*0.74+0.26))))}
+  function draw(lift,flyIdx){
+    const s=birdSize();board.style.setProperty("--bs",s+"px");
+    board.innerHTML=bs.map((br,i)=>{
+      const right=i%2===1,run=(i===sel)?bTopRun(br):0;
+      const birds=br.map((c,j)=>`<span class="bird ${j>=br.length-run?"up":""} ${flyIdx===i?"fly":""} ${lift&&lift.b===i&&j>=br.length-lift.n?"hop":""}" style="z-index:${right?100-j:j+1}">${birdSVG(c,right)}</span>`).join("");
+      return `<button class="branch ${right?"R":"L"} ${i===sel?"sel":""}" data-b="${i}" aria-label="Branch ${i+1}: ${br.length?br.map(c=>BIRD_COLORS[c].n).join(", "):"empty"}"><span class="perch">${birds}</span><span class="bar"></span></button>`}).join("");
+    $$("#bBoard .branch").forEach(b=>b.onclick=()=>tap(+b.dataset.b));
+    status(`Flocks flown home: ${home} of ${K} · Moves: ${moves}`);
+    $("#bUndo").disabled=!hist.length;$("#bExtra").disabled=extra>0;
+  }
+  function snapshot(){hist.push({bs:bs.map(b=>b.slice()),home})}
+  function clearHint(){$$("#bBoard .branch").forEach(b=>b.classList.remove("hint"))}
+  function tap(i){
+    if(busy||finished)return;clearHint();
+    const br=bs[i];
+    if(sel<0){
+      if(!br.length){sfx.soft();fb("That branch is empty. Tap a branch with birds first. 🐦","soft");return}
+      sel=i;sfx.chirp(1);fb(`Now tap the branch where they should fly. ${N()}, you've got this!`);draw();return;
+    }
+    if(sel===i){sel=-1;sfx.pop();fb("");draw();return}
+    if(bCanMove(bs,sel,i,cap)){
+      snapshot();const n=bApply(bs,sel,i,cap);moves++;sel=-1;sfx.flap();sfx.chirp(2);
+      draw({b:i,n});
+      if(bDone(bs[i],cap)){busy=true;
+        later(()=>{draw(null,i);sfx.chirpSong();goodFb("The whole flock is together! 🎉")},350);
+        later(()=>{bs[i]=[];home++;busy=false;draw();
+          if(home>=K){finished=true;sfx.sparkle();confetti(60);
+            const norm=Math.max(40,100-Math.max(0,moves-deal.par-3)*2-hints*6-extra*12-restarts*8-undos);
+            later(()=>done({norm,detail:`All ${K} flocks flew home together in ${moves} moves!${hints?` (${hints} hint${hints>1?"s":""} used)`:""}`}),900)}
+        },1250);
+      }else fb(rnd(["Lovely move! 🐦","Tweet tweet! 🎵","Nice and tidy!","Good thinking!"]),"good");
+      return;
+    }
+    if(!br.length||br.length>=cap){sfx.soft();fb(br.length>=cap?"That branch is full. Try another one! 😊":"Hmm, try another branch. 😊","soft");return}
+    sfx.soft();fb(`Birds only join their own color. Let's pick up this branch instead.`,"soft");sel=i;draw();
+  }
+  $("#bUndo").onclick=()=>{const h=hist.pop();if(!h)return;bs=h.bs;home=h.home;sel=-1;undos++;clearHint();sfx.pop();fb("Birds back where they were. 👍");draw()};
+  $("#bRestart").onclick=()=>{bs=start.map(b=>b.slice());hist=[];home=0;sel=-1;moves=0;restarts++;extra=0;sfx.flap();fb("A fresh start with the same birds. You can do it! 🌱");draw()};
+  $("#bExtra").onclick=()=>{if(extra||busy||finished)return;extra=1;bs.push([]);plan=null;sfx.sparkle();fb("Here's an extra branch to help. 🌿");draw()};
+  $("#bHint").onclick=()=>{
+    if(busy||finished)return;
+    clearHint();
+    const rawKey=x=>x.map(b=>b.join(",")).join("|");
+    const cur=rawKey(bs);let j=plan?plan.keys.indexOf(cur):-1;
+    if(j<0){
+      const sol=birdSolve(bs,cap,60000);
+      if(sol){const keys=[],sim=bs.map(b=>b.slice());sol.forEach(([a,b])=>{keys.push(rawKey(sim));bApply(sim,a,b,cap);sim.forEach((x,i)=>{if(bDone(x,cap))sim[i]=[]})});plan={sol,keys};j=0}else plan=null;
+    }
+    const sol=plan?plan.sol.slice(j):null;
+    if(!sol||!sol.length){fb(extra?"Let's tap Undo a few times or Restart, and try a new path. 💛":"Try the 🌿 Extra branch button or Undo. There's always a way! 💛","soft");return}
+    hints++;sel=-1;draw();const [a,b]=sol[0];
+    const el=$$("#bBoard .branch");el[a].classList.add("hint");el[b].classList.add("hint");el[a].dataset.hint="from";el[b].dataset.hint="to";sfx.sparkle();
+    fb(`Try moving the birds from one glowing branch to the other. ✨`);
+  };
+  draw();fb(`Help the birds sit with their own color, ${N()}! Tap a branch to pick up the birds on the end. 🐦`);
+  const onR=()=>{if(!board.isConnected){window.removeEventListener("resize",onR);return}draw()};
+  window.addEventListener("resize",onR);
+  if(window.innerHeight<900)later(()=>{const bar=$(".mjbar");if(bar)window.scrollTo({top:bar.getBoundingClientRect().top+window.scrollY-70,behavior:"smooth"})},400);
 };
 
 /* ============ Boot ============ */
