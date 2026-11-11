@@ -1,5 +1,5 @@
 /* Bright Mind service worker: caches everything for offline play. Bump VERSION when files change. */
-const VERSION = "bright-mind-v3";
+const VERSION = "bright-mind-v4";
 const ASSETS = ["./", "./index.html", "./messages.js", "./trivia.js", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png"];
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
